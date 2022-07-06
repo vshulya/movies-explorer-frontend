@@ -1,0 +1,14 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/font.css);
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #202020;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  color: #FFFFFF;
+}
