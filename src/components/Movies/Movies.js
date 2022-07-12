@@ -1,12 +1,16 @@
 import React from 'react';
-import SearchForm from "../SearchForm";
+//import Preloader from '../Preloader/Preloader';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
-function Main() {
+function Movies() {
   return (
     <>
       <SearchForm />
+      {/* <Preloader /> */}
+      <MoviesCardList />
     </>
   )
 };
-export default Main;
+export default Movies ;

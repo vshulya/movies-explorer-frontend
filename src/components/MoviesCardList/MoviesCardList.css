@@ -1,0 +1,33 @@
+.movies {
+  padding: 0 70px 80px 70px;
+}
+
+.movies-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 31px 21px;
+}
+
+.movies__button {
+  margin-top: 50px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  /* or 131% */
+  background: #2F2F2F;
+  border: none;
+  width: 100%;
+  border-radius: 6px;
+  height: 36px;
+  color: #8B8B8B;
+  transition: .3s;
+}
+
+.movies__button:hover {
+  opacity: .8;
+  transition: .3s;
+  cursor: pointer;
+}

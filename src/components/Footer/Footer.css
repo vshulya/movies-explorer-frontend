@@ -32,6 +32,7 @@
   justify-content: center;
   gap: 20px;
   list-style-type: none;
+  margin: 0;
 }
 
 .footer__link {
