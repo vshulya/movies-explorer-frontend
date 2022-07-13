@@ -5,6 +5,8 @@ import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
 
 function App() {
   return (
@@ -28,6 +30,25 @@ function App() {
                 <Header/>
                 <Movies/>
                 <Footer/>
+            </>
+            }>
+          </Route>
+          <Route 
+            exact path='/saved-movies' 
+            element={
+              <>
+                <Header />
+                <SavedMovies />
+                <Footer />
+            </>
+            }>
+          </Route>
+          <Route 
+            exact path='/profile' 
+            element={
+              <>
+                <Header />
+                <Profile />
             </>
             }>
           </Route>

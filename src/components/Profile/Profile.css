@@ -1,0 +1,125 @@
+.profile {
+  padding-top: 74px;
+  max-width: 430px;
+  color: white;
+  position: relative;
+  margin: auto;
+  text-align: center;
+}
+
+.profile__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+  text-align: center;
+}
+
+.profile__form {
+  width: 410px;
+  margin: auto;
+  padding-top: 123px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.profile__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile__field {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  color: #FFFFFF;
+
+}
+
+.profile__field:first-of-type {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__form {
+    width: 100%;
+    padding-top: 37px;
+  }
+}
+
+.profile__input {
+  width: 80%;
+  height: 100%;
+  border: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: right;
+  color: #FFFFFF;
+  background-color: transparent;
+}
+
+.profile__hint {
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 17px;
+  padding-top: 15px;
+  margin: 0;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__hint {
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 20px;
+  }
+}
+
+.profile__link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.profile__buttons {
+  display: grid;
+  padding: 220px 0 70px 0;
+  gap: 16px;
+  justify-items: center
+}
+
+.profile__edit-button {
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  color: #FFFFFF;
+  transition: .3s;
+}
+
+.profile__edit-button:hover {
+  transition: .3s;
+  opacity: .8;
+  cursor: pointer;
+}
+
+.profile__logout-button {
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  color: #EE3465;
+  transition: .3s;
+}
+
+.profile__logout-button:hover {
+  transition: .3s;
+  opacity: .8;
+  cursor: pointer;
+}
