@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
+import Register from '../Register/Register';
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
               <>
                 <Header />
                 <Profile />
+            </>
+            }>
+          </Route>
+          <Route 
+            exact path='/signup' 
+            element={
+              <>
+                <Register />
             </>
             }>
           </Route>

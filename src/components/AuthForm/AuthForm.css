@@ -1,0 +1,28 @@
+.auth__container {
+  padding: 70px 0;
+  max-width: 430px;
+  color: white;
+  margin: auto;
+}
+
+.auth__title {
+  margin: 0;
+  padding-top: 40px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+}
+
+.auth__form {
+  width: 410px;
+  margin: auto;
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 540px) {
+  .auth__form {
+    width: 100%;
+    padding-top: 37px;
+  }
+}
