@@ -4,7 +4,20 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
+
 function Movies() {
+
+  // const [isLoading, setIsLoading] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   setIsLoading(true);
+  //  //api
+  //   .then(res => res)
+  //   .finally(() =>{
+  //     setIsLoading(false);
+  //   })
+  // })
+
   return (
     <>
       <SearchForm />

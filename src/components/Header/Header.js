@@ -1,17 +1,18 @@
 import React from "react";
 import './Header.css';
-import logo from '../../images/logo.svg';
+import Logo from '../Logo/Logo';
+import { Link } from "react-router-dom";
 
 function Header(props) {
 
   return (
     <header className="header">
-          <div className="header__header">
-            <img src={logo} alt="лого" className="logo" />
+          <div className="header__wrapper">
+            <Logo />
           </div>
           <nav className="header__menu">
-            <a href="#" className="header__email">Регистрация</a>
-            <a href="#" className="header__link">Войти</a>
+            <Link className="header__email link" to="/signup">Регистрация</Link>
+            <Link className="header__link link" to="/signin">Войти</Link>
           </nav>
     </header>
   );

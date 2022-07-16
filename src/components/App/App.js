@@ -8,6 +8,9 @@ import Footer from "../Footer/Footer";
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
+import Navigation from '../Navigation/Navigation';
+import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -28,7 +31,7 @@ function App() {
             exact path='/movies' 
             element={
               <>
-                <Header/>
+                <Navigation/>
                 <Movies/>
                 <Footer/>
             </>
@@ -38,7 +41,7 @@ function App() {
             exact path='/saved-movies' 
             element={
               <>
-                <Header />
+                <Navigation/>
                 <SavedMovies />
                 <Footer />
             </>
@@ -48,7 +51,7 @@ function App() {
             exact path='/profile' 
             element={
               <>
-                <Header />
+                <Navigation/>
                 <Profile />
             </>
             }>
@@ -58,7 +61,23 @@ function App() {
             element={
               <>
                 <Register />
-            </>
+              </>
+            }>
+          </Route>
+          <Route 
+            exact path='/signin' 
+            element={
+              <>
+                <Login />
+              </>
+            }>
+          </Route>
+          <Route 
+            exact path='*' 
+            element={
+              <>
+                <NotFoundPage />
+              </>
             }>
           </Route>
         </Routes>

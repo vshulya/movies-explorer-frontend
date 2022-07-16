@@ -1,26 +1,14 @@
 import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
-import './Register.css';
+import './Login.css';
 import { Link } from "react-router-dom";
 
-const Register = (props) => {
+const Login = (props) => {
   return (
     <AuthForm
-      title="Добро пожаловать!"
+      title="Рады видеть!"
     >
       <fieldset className='auth__fieldset'>
-        <label className="auth__field">
-          <p className='auth__input-name'>Имя</p>
-          <input
-            type="name"
-            defaultValue={'Валентина'}
-            //onChange={handleChange}
-            id="name-input"
-            name="name"
-            className="auth__input auth__input_type_name"
-            required />
-            <span className='auth__error'></span>
-        </label>
         <label className="auth__field">
           <p className='auth__input-name'>Email</p>
           <input
@@ -40,20 +28,19 @@ const Register = (props) => {
             defaultValue={''}
             //onChange={handleChange}
             id="password-input"
-            //name="password"
+            name="password"
             className="auth__input auth__input_type_password"
             minLength="2"
             maxLength="200"
             required />
-            <span className='auth__error'>Что-то пошло не так</span>
         </label>
       </fieldset>
-      <button type="submit" className="auth__button">Зарегистрироваться</button>
-      <p className="auth__hint">Уже зарегистрированы?{" "}
-      <Link className="auth__link" to="/signin">Назад</Link>
+      <button type="submit" className="auth__button">Войти</button>
+      <p className="auth__hint">Ещё не зарегистрированы?{" "}
+        <Link className="auth__link" to="/signup">Регистрация</Link>
       </p>
     </AuthForm>
   )
 }
 
-export default Register;
+export default Login;
