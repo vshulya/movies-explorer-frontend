@@ -2,6 +2,18 @@
   padding: 60px 70px 80px 70px;
 }
 
+@media screen and (max-width: 940px) {
+  .searchForm {
+    padding: 70px 30px 80px 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .movies {
+    padding: 0 10px 89px 10px;
+  }
+}
+
 .searchForm__form {
   display: flex;
   justify-content: space-between;

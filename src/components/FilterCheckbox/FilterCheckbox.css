@@ -5,6 +5,12 @@
   border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
+@media screen and (max-width: 940px) {
+  .filterCheckbox {
+    padding-bottom: 52px;
+  }
+}
+
 .filterCheckbox__checkbox {
   display: inline-block;
   height: 20px;

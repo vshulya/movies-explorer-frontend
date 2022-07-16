@@ -1,8 +1,29 @@
+.auth {
+  height: 100vh;
+}
+
+@media screen and (max-width: 540px) {
+  .auth {
+    align-items: center;
+  }
+}
+
 .auth__container {
   padding: 70px 0;
   max-width: 430px;
   color: white;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 540px) {
+  .auth__container {
+    padding: 56px 30px 30px 30px;
+    align-items: center;
+  }
 }
 
 .auth__title {
@@ -15,14 +36,125 @@
 }
 
 .auth__form {
-  width: 410px;
-  margin: auto;
   padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 540px) {
   .auth__form {
     width: 100%;
-    padding-top: 37px;
+    padding-top: 81px;
+  }
+}
+
+.auth__fieldset {
+  border: none;
+  /* padding: 0 0 134px 0; */
+  margin: 0;
+  display: grid;
+  gap: 20px;
+}
+
+.auth__field {
+  width: 100%;
+  display: grid;
+  gap: 4px;
+}
+
+.auth__input-name {
+  margin: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+}
+
+.auth__input {
+  border: none;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #FFFFFF;
+  overflow: hidden;
+  background-color: transparent;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #424242;
+}
+
+.auth__error {
+  padding-top: 6px;
+  margin: 0;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
+.auth__button {
+  border: none;
+  max-width: 396px;
+  width: 100%;
+  height: 45px;
+  background: #4285F4;
+  border-radius: 3px;
+  color: #FFFFFF;
+  margin-top: 69px;
+}
+
+.auth__button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 940px) {
+  .auth__button {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .auth__button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.auth__hint {
+  padding-top: 16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-align: center;
+  color: #8B8B8B;
+  margin: 0;
+}
+
+@media screen and (max-width: 540px) {
+  .auth__hint {
+    font-size: 12px;
+    line-height: 15px;
+    padding-top: 12px;
+  }
+}
+
+.auth__link {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-align: center;
+  color: #4285F4;
+}
+
+@media screen and (max-width: 540px) {
+  .auth__link {
+    font-size: 12px;
+    line-height: 15px;
   }
 }

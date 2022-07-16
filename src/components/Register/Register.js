@@ -48,10 +48,12 @@ const Register = (props) => {
             <span className='auth__error'>Что-то пошло не так</span>
         </label>
       </fieldset>
-      <button type="submit" className="auth__button">Зарегистрироваться</button>
-      <p className="auth__hint">Уже зарегистрированы?{" "}
-      <Link className="auth__link" to="/signin">Назад</Link>
-      </p>
+      <div className="auth__button-wrapper">
+        <button type="submit" className="auth__button auth__button_reg button">Зарегистрироваться</button>
+        <p className="auth__hint">Уже зарегистрированы?{" "}
+        <Link className="auth__link link" to="/signin">Войти</Link>
+        </p>
+      </div>
     </AuthForm>
   )
 }

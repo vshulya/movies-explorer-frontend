@@ -20,7 +20,7 @@ function HamburgerMenuModal({onClick, isOpen, onClose}) {
             <Link className="hamburger__link hamburger__link_active link" to="/signup">Фильмы</Link>
             <Link className="hamburger__link link" to="/signin">Сохранённые фильмы</Link>
           </nav>
-          <button className="nav__button button">Аккаунт</button>
+          <button className="hamburger__login-button button">Аккаунт</button>
         </div>
     </>
   );

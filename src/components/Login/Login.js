@@ -7,7 +7,7 @@ const Login = (props) => {
   return (
     <AuthForm
       title="Рады видеть!"
-    >
+    > 
       <fieldset className='auth__fieldset'>
         <label className="auth__field">
           <p className='auth__input-name'>Email</p>
@@ -35,10 +35,12 @@ const Login = (props) => {
             required />
         </label>
       </fieldset>
-      <button type="submit" className="auth__button">Войти</button>
-      <p className="auth__hint">Ещё не зарегистрированы?{" "}
-        <Link className="auth__link" to="/signup">Регистрация</Link>
-      </p>
+      <div className="auth__button-wrapper">
+        <button type="submit" className="auth__button button">Войти</button>
+        <p className="auth__hint">Ещё не зарегистрированы?{" "}
+          <Link className="auth__link link" to="/signup">Регистрация</Link>
+        </p>
+      </div>
     </AuthForm>
   )
 }

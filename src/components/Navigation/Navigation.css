@@ -13,6 +13,14 @@
   }
 }
 
+@media screen and (max-width: 540px) {
+  .nav {
+    padding: 15px 14px;
+    display: flex;
+    flex-direction: space-between;
+  }
+}
+
 .nav__wrapper {
   display: flex;
   align-items: center;
