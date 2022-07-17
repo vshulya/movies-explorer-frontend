@@ -1,20 +1,22 @@
 import './NotFoundPage.css';
-import {Link, useHistory} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export function NotFoundPage(){
 
-  // const history = useHistory();
+  const navigate = useNavigate();
 
-  // function handleBack(){
-  //   history.goBack()
-  // }
+  function handleBack(){
+    navigate(-1)}
 
   return(
-    <div className="notFound">
-      <h2 className="notFound__title">404</h2>
-      <p className="notFound__subtitle">Страница не найдена</p>
-      <Link className="notFound__link" to="/signin">Назад</Link>
-      {/* <div><a href='#' className="notFound__link">Назад</a></div> TODO add to="/signin" */}
-    </div>
+    <section className="notFound">
+      <div className="notFound__container">
+        <div className="notFound__wrapper">
+          <h2 className="notFound__title">404</h2>
+          <p className="notFound__subtitle">Страница не найдена</p>
+        </div>
+        <Link className="notFound__link link" to="" onClick={handleBack}>Назад</Link>
+      </div>
+    </section>
   )
 }

@@ -68,16 +68,17 @@
   background-position: center;
   background-repeat: no-repeat;
   border: none;
-  cursor: pointer;
 }
 
-.movie__save-button:hover {
-  transition: .3s;
-  opacity: 0.8;
-}
 
 .movie__save-button_saved {
   background: url(../../images/saved.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.movie__save-button_delete {
+  background: url(../../images/dlt_movie.svg);
   background-position: center;
   background-repeat: no-repeat;
 }

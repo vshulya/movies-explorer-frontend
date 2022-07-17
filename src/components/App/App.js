@@ -51,7 +51,6 @@ function App() {
             exact path='/profile' 
             element={
               <>
-                <Navigation/>
                 <Profile />
             </>
             }>

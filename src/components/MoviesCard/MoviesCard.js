@@ -11,7 +11,7 @@ function MoviesCard(props) {
           <h2 className="movie__title">33 слова о дизайне</h2>
           <p className="movie__duration">1ч42м</p>
         </div>
-        <button type="button" className="movie__save-button movie__save-button_saved"></button>
+        <button type="button" className="movie__save-button movie__save-button_saved movie__save-button_delete button"></button>
       </div>
     </li>
   );

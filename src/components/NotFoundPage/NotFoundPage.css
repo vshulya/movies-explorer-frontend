@@ -1,9 +1,17 @@
 .notFound {
+  height: 100vh;
+}
+
+.notFound__container {
   padding: 246px 0 60px 0;
   max-width: 430px;
-  color: white;
   margin: auto;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .notFound__title {
@@ -14,19 +22,39 @@
   text-align: center;
 }
 
+@media screen and (max-width: 540px) {
+  .notFound__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+}
+
 .notFound__subtitle {
   margin: 0;
-  padding: 5px 0 184px 0;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+
+@media screen and (max-width: 540px) {
+  .notFound__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
 
 .notFound__link {
+  padding-top: 70px;
   text-decoration: none;
   color: #4285F4;
-  transition: .3s;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
 }
 
-.notFound__link:hover {
-  transition: .3s;
-  opacity: .8;
-  cursor: pointer;
+@media screen and (max-width: 540px) {
+  .notFound__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

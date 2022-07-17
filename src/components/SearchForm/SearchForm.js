@@ -13,7 +13,7 @@ function SearchForm(props) {
         placeholder="Фильм" 
         name="name"
         required />
-        <button className="searchForm__button" type="submit">
+        <button className="searchForm__button button" type="submit">
             <img src={search} alt="значок поиска" className="searchForm__search"/>
         </button>
       </form>    

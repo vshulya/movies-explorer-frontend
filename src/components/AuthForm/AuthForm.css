@@ -10,7 +10,7 @@
 
 .auth__container {
   padding: 70px 0;
-  max-width: 430px;
+  max-width: 396px;
   color: white;
   margin: auto;
   display: flex;
@@ -53,8 +53,9 @@
 
 .auth__fieldset {
   border: none;
-  /* padding: 0 0 134px 0; */
+  padding: 0;
   margin: 0;
+  width: 100%;
   display: grid;
   gap: 20px;
 }
@@ -101,18 +102,18 @@
   background: #4285F4;
   border-radius: 3px;
   color: #FFFFFF;
-  margin-top: 69px;
 }
 
 .auth__button-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding-top: 70px;
 }
 
 @media screen and (max-width: 940px) {
   .auth__button {
     margin-top: 0;
+    align-items: center;
   }
 }
 

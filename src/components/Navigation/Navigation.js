@@ -52,8 +52,8 @@ function Navigation(props) {
                 />
             </div>
             <nav className="nav__menu"> 
-              <Link className="nav__link nav__link_active link" to="/signup">Фильмы</Link>
-              <Link className="nav__link link" to="/signin">Сохранённые фильмы</Link>
+              <Link className="nav__link nav__link_active link" to="/movies">Фильмы</Link>
+              <Link className="nav__link link" to="/saved-movies">Сохранённые фильмы</Link>
             </nav>
             </div>
             <button className="nav__button button">Аккаунт</button>
