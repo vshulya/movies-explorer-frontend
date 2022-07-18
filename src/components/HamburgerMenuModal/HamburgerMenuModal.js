@@ -17,10 +17,10 @@ function HamburgerMenuModal({onClick, isOpen, onClose}) {
         <button className="hamburger__close-button button" onClick={onClose}/>
           <nav className="hamburger__nav">
             <Link className="hamburger__link link" to="/">Главная</Link>
-            <Link className="hamburger__link hamburger__link_active link" to="/signup">Фильмы</Link>
-            <Link className="hamburger__link link" to="/signin">Сохранённые фильмы</Link>
+            <Link className="hamburger__link hamburger__link_active link" to="/movies">Фильмы</Link>
+            <Link className="hamburger__link link" to="/saved-movies">Сохранённые фильмы</Link>
           </nav>
-          <button className="hamburger__login-button button">Аккаунт</button>
+          <Link className="hamburger__login-button button" to="/profile">Аккаунт</Link>
         </div>
     </>
   );

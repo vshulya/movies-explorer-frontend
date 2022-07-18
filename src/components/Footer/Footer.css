@@ -1,5 +1,5 @@
 .footer {
-  padding: 79px 70px 20px 70px;
+  padding: 60px 70px 20px 70px;
 }
 
 @media screen and (max-width: 940px) {
@@ -10,7 +10,7 @@
 
 @media screen and (max-width: 540px) {
   .footer {
-    padding: 76px 10px 10px 10px;
+    padding: 129px 10px 10px 10px;
   }
 }
 
@@ -36,6 +36,7 @@
   .footer__menu {
     flex-direction: column-reverse;
     align-items: center;
+    padding-top: 26px;
   }
 }
 
@@ -65,7 +66,7 @@
     flex-direction: column;
     padding: 0;
     text-align: center;
-    gap: 12px;
+    gap: 9px;
   }
 }
 

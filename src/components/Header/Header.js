@@ -7,9 +7,7 @@ function Header(props) {
 
   return (
     <header className="header">
-          <div className="header__wrapper">
-            <Logo />
-          </div>
+          <Logo />
           <nav className="header__menu">
             <Link className="header__email link" to="/signup">Регистрация</Link>
             <Link className="header__link link" to="/signin">Войти</Link>

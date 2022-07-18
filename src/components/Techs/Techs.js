@@ -16,7 +16,7 @@ function Techs(props) {
         <div className="techs__tech">React</div>
         <div className="techs__tech">Git</div> 
         <div className="techs__tech">Express.js</div>
-        <div className="techs__tech">MongoDB</div>
+        <div className="techs__tech">mongoDB</div>
       </div>   
     </section>
   );

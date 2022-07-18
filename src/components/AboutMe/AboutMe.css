@@ -4,7 +4,13 @@
 
 @media screen and (max-width: 960px) {
   .aboutMe {
-    padding: 90px 50px 0 50px;
+    padding: 90px 50px 17px 50px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .aboutMe {
+    padding: 70px 18px;
   }
 }
 
@@ -19,9 +25,23 @@
   border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
+@media screen and (max-width: 540px) {
+  .aboutMe__title {
+    font-size: 18px;
+    line-height: 22px;
+    border-bottom: 1px solid #dadada;
+  }
+}
+
 .aboutMe__content {
   display: flex;
   justify-content: space-between
+}
+
+@media screen and (max-width: 540px) {
+  .aboutMe__content {
+    flex-direction: column-reverse;
+  }
 }
 
 .aboutMe__info {
@@ -38,10 +58,18 @@
   letter-spacing: -0.04em;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 940px) {
   .aboutMe__subtitle {
     font-size: 40px;
     line-height: 40px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .aboutMe__subtitle {
+    padding-top: 27px;
+    font-size: 30px;
+    line-height: 36px;
   }
 }
 
@@ -55,10 +83,17 @@
   mix-blend-mode: normal;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 940px) {
   .aboutMe__caption {
+    padding-top: 14px;
     font-size: 12px;
     line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .aboutMe__caption {
+    padding-top: 19px;
   }
 }
 
@@ -71,22 +106,48 @@
   /* or 157% */
   color: #FFFFFF;
   mix-blend-mode: normal;
+  max-width: 600px;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 940px) {
   .aboutMe__text {
     padding-top: 20px;
     font-size: 12px;
     line-height: 18px;
+    max-width: 364px;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .aboutMe__text {
+    font-size: 11px;
+    line-height: 16px;
+    /* or 145% */
+    color: #FFFFFF;
+    width: 100%;
   }
 }
 
 .aboutMe__pic {
-  margin-top: 66px;
+  margin: 66px 0 0 30px;
   max-width: 270px;
-  height: 327px;
+  max-height: 327px;
   border-radius: 10px;
   object-fit: contain;
+}
+
+@media screen and (max-width: 940px) {
+  .aboutMe__pic {
+    max-height: 307px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .aboutMe__pic {
+    max-height: 352px;
+    max-width: 292px;
+    margin: 60px auto 0 auto;
+  }
 }
 
 .aboutMe__links {
@@ -95,6 +156,18 @@
   list-style-type: none;
   margin: 0;
   padding: 99px 0 0 0;
+}
+
+@media screen and (max-width: 940px) {
+  .aboutMe__links {
+    padding-top: 87px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .aboutMe__links {
+    padding-top: 40px;
+  }
 }
 
 .aboutMe__link {

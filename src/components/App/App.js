@@ -12,6 +12,8 @@ import Login from '../Login/Login';
 import Navigation from '../Navigation/Navigation';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 
+import api from '../../utils/MainApi';
+
 function App() {
   return (
     <div className="App">
