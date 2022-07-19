@@ -11,8 +11,15 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Navigation from '../Navigation/Navigation';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
+import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 
 function App() {
+
+  mainApi.getProfile();
+
+  moviesApi.getMovies();
+
   return (
     <div className="App">
       <Router>
