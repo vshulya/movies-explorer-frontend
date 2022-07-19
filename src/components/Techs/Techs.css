@@ -1,0 +1,140 @@
+.techs {
+  background-color: #272727;
+  padding: 100px 70px 100px 70px;
+}
+
+@media screen and (max-width: 960px) {
+  .techs {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .techs {
+    padding: 70px 18px;
+    background-color: #202020;
+  }
+}
+
+.techs__title {
+  margin: 0;
+  padding-bottom: 23px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  /* identical to box height */
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media screen and (max-width: 540px) {
+  .techs__title {
+    font-size: 18px;
+    line-height: 22px;
+    border-bottom: 1px solid #dadada;
+  }
+}
+
+.techs__subtitle {
+  padding-top: 90px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  /* identical to box height, or 116% */
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 940px) {
+  .techs__subtitle {
+    padding-top: 80px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .techs__subtitle {
+    padding-top: 60px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+}
+
+.techs__text {
+  padding-top: 26px;
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
+  text-align: center;
+  letter-spacing: -0.04em;
+  max-width: 460px;
+  width: 100%;
+}
+
+@media screen and (max-width: 940px) {
+  .techs__text {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+    /* or 150% */
+    text-align: center;
+    letter-spacing: -0.04em;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.techs__techs {
+  display: flex;
+  padding-top: 100px;
+  gap: 10px;
+  justify-content: center;
+  justify-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media screen and (max-width: 940px) {
+  .techs__techs {
+    padding-top: 83px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .techs__techs {
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 84px);
+    grid-template-rows: repeat(4, 57px);
+  }
+}
+
+.techs__tech {
+  height: 60px;
+  width: 90px;
+  background-color: #303030;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: -0.04em;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 540px) {
+  .techs__tech {
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+  }
+}

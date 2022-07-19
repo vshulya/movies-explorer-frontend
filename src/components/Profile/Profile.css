@@ -1,0 +1,131 @@
+.profile {
+  height: calc(100vh - 74px);
+}
+
+.profile__container {
+  padding: 70px 0;
+  max-width: 396px;
+  color: white;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__container {
+    padding: 76px 30px 30px 30px;
+  }
+}
+
+.profile__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+  text-align: center;
+}
+
+.profile__form {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 940px) {
+  .profile__form {
+    padding-top: 99px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .profile__form {
+    padding-top: 77px;
+  }
+}
+
+.profile__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile__field {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  color: #FFFFFF;
+
+}
+
+.profile__field:first-of-type {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 16px;
+}
+
+.profile__input {
+  width: 80%;
+  height: 100%;
+  border: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: right;
+  color: #FFFFFF;
+  background-color: transparent;
+}
+
+.profile__hint {
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 17px;
+  padding-top: 15px;
+  margin: 0;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__hint {
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 20px;
+  }
+}
+
+.profile__link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.profile__buttons {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  margin-top: 69px;
+}
+
+
+.profile__edit-button {
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  color: #FFFFFF;
+}
+
+.profile__logout-button {
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  color: #EE3465;
+}

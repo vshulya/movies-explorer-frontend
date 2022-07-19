@@ -1,0 +1,116 @@
+.promo {
+  display: flex;
+  justify-content: space-between;
+  background-color: #073042;
+  padding: 70px 70px 78px 70px;
+}
+
+@media screen and (max-width: 960px) {
+  .promo {
+    padding: 140px 44px 76px 44px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .promo {
+    padding: 70px 10px 20px 10px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .promo__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.promo__title {
+  font-size: 50px;
+  line-height: 58px;
+  font-weight: 400;
+  max-width: 630px;
+  width: 100%;
+  margin: 0;
+}
+
+@media screen and (max-width: 960px) {
+  .promo__title {
+    padding-top: 48px;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 50px;
+    /* or 125% */
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .promo__title {
+    padding-top: 41px;
+    font-size: 30px;
+    line-height: 38px;
+    /* or 127% */
+    text-align: center;
+    letter-spacing: -0.04em;
+    max-width: 300px;
+    width: 100%;
+  }
+}
+
+.promo__subtitle {
+  padding: 36px 0 146px;
+  font-size: 13px;
+  line-height: 16px;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  margin: 0;
+  max-width: 310px;
+  width: 100%;
+}
+
+@media screen and (max-width: 960px) {
+  .promo__subtitle {
+    text-align: center;
+    padding: 22px 0 91px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .promo__subtitle {
+    max-width: 260px;
+    width: 100%;
+  }
+}
+
+.promo__button {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+  align-items: center;
+  border: 1px solid rgb(255, 255, 255, .6);
+  border-radius: 3px;
+  background-color: transparent;
+  color: #fff;
+  width: 129px;
+  height: 36px;
+}
+
+.promo__hero {
+  object-fit: cover;
+  width: 310px;
+  height: 304px;
+}
+
+@media screen and (max-width: 560px) {
+  .promo__hero {
+    width: 210px;
+    height: 206px;
+  }
+}

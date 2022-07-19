@@ -1,0 +1,90 @@
+.filterCheckbox {
+  padding: 41px 0 70px 0;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media screen and (max-width: 940px) {
+  .filterCheckbox {
+    padding-bottom: 52px;
+  }
+}
+
+.filterCheckbox__checkbox {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  margin-right: 12px;
+  position: relative;
+  vertical-align: middle;
+  font-size: 14px;
+  user-select: none;
+}
+
+.filterCheckbox__checkbox .filterCheckbox__switch {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 20px;
+  width: 36px;
+  background: #2F2F2F;
+  /* background: #202020; */
+  /* Button Shadows/Button - 4dp - Shadow */
+  /* box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06); */
+  border-radius: 16px;
+  vertical-align: top;
+  transition: .3s;
+}
+
+.filterCheckbox__checkbox .filterCheckbox__switch:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #A0A0A0;
+
+  transition: .15s;
+}
+
+.filterCheckbox__checkbox input[type=checkbox] {
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.filterCheckbox__checkbox input[type=checkbox]:not(:disabled):active+.filterCheckbox__switch:before {
+  box-shadow: inset 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+}
+
+.filterCheckbox__checkbox input[type=checkbox]:checked+.filterCheckbox__switch {
+  /* background: #202020; */
+  background: #2F2F2F;
+}
+
+.filterCheckbox__checkbox input[type=checkbox]:checked+.filterCheckbox__switch:before {
+  transform: translateX(16px);
+  background: #2BE080;
+
+}
+
+/* Hover */
+.filterCheckbox__checkbox input[type="checkbox"]:not(:disabled)+.filterCheckbox__switch {
+  cursor: pointer;
+}
+
+.filterCheckbox__caption {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height, or 129% */
+  color: #FFFFFF;
+}
