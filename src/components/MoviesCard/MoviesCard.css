@@ -24,6 +24,11 @@
   }
 }
 
+.movie__image-link {
+  margin: 0;
+  text-decoration: none;
+}
+
 .movie__image {
   width: 100%;
 }
