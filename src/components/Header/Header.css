@@ -1,5 +1,4 @@
 .header {
-  margin-top: 52px;
   display: flex;
   justify-content: space-between;
   background-color: #073042;
@@ -9,13 +8,13 @@
 @media screen and (max-width: 960px) {
   .header {
     margin: 0;
-    padding: 13px 30px 10px 30px;
+    padding: 18px 30px 10px 30px;
   }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 540px) {
   .header {
-    padding: 22px 40px;
+    padding: 18px 10px;
   }
 }
 

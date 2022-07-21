@@ -1,28 +1,22 @@
-import React from 'react';
-//import Preloader from '../Preloader/Preloader';
+import React, { useEffect, useState } from 'react';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Navigation from "../Navigation/Navigation";
+import Footer from "../Footer/Footer";
+import Preloader from '../Preloader/Preloader';
 
 
 
-function Movies() {
-
-  // const [isLoading, setIsLoading] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   setIsLoading(true);
-  //  //api
-  //   .then(res => res)
-  //   .finally(() =>{
-  //     setIsLoading(false);
-  //   })
-  // })
+function Movies({movies, isLoading}) {
 
   return (
     <>
+      <Navigation/>
       <SearchForm />
-      {/* <Preloader /> */}
-      <MoviesCardList />
+      {isLoading && <Preloader />}
+      <MoviesCardList 
+      movies={movies} />
+      <Footer/>
     </>
   )
 };

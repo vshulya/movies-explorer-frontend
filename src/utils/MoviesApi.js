@@ -15,7 +15,7 @@ class MoviesApi {
     return fetch(`${this._baseUrl}`, {
       headers: this._headers()
     })
-      .then(this._checkResponse)
+    .then(this._checkResponse);
   };
 }
 
@@ -25,8 +25,8 @@ class MoviesApi {
       return  {
       Accept: 'application/json',
       'Content-Type': 'application/json'
-    }
+      }
     }
   });
-
+  
   export default moviesApi;

@@ -16,7 +16,7 @@
 
 @media screen and (max-width: 560px) {
   .promo {
-    padding: 70px 10px 70px 10px;
+    padding: 70px 10px 20px 10px;
   }
 }
 
@@ -48,9 +48,9 @@
   }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 540px) {
   .promo__title {
-    padding-top: 35px;
+    padding-top: 41px;
     font-size: 30px;
     line-height: 38px;
     /* or 127% */

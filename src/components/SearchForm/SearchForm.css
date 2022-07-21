@@ -21,6 +21,7 @@
   border-radius: 40px;
   height: 46px;
   padding-left: 22px;
+  align-items: center;
 }
 
 .searchForm__input {
@@ -37,11 +38,5 @@
 .searchForm__button {
   border: none;
   background-color: transparent;
-  transition: .3s;
-}
-
-.searchForm__button:hover {
-  opacity: .8;
-  transition: .3s;
-  cursor: pointer;
+  display: flex;
 }

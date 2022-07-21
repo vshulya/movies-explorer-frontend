@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import Main from "../Main/Main";
@@ -14,11 +14,32 @@ import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 
+
 function App() {
 
-  mainApi.getProfile();
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  moviesApi.getMovies();
+  useEffect(() => {
+    setIsLoading(true);
+    moviesApi.getMovies([])
+    .then((movies) => {
+      setMovies(movies);
+    })
+    .catch((err) => console.log(err))
+    .finally(() =>{
+      setIsLoading(false);
+    })
+  }, [])
+
+  // React.useEffect(() => {
+  //   Promise.all([api.getInitialCards(), api.getProfile()])
+  //     .then(([cards, userData]) => {
+  //       setCurrentUser(userData);
+  //       setCards(cards);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <div className="App">
@@ -29,18 +50,18 @@ function App() {
               element={
                 <>
                   <Header/>
-                  <Main/>
+                  <Main />
                   <Footer/>
                 </>
             }>
           </Route>
           <Route 
             exact path='/movies' 
+            isLoading={isLoading}
+            movies={movies}
             element={
               <>
-                <Navigation/>
-                <Movies/>
-                <Footer/>
+                <Movies movies={movies}/>
             </>
             }>
           </Route>
