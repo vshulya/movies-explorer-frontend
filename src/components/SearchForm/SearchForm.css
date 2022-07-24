@@ -35,6 +35,12 @@
   width: 100%;
 }
 
+/* TODO edit style  */
+.searchForm__error {
+  font-size: 13px;
+  line-height: 17px;
+}
+
 .searchForm__button {
   border: none;
   background-color: transparent;

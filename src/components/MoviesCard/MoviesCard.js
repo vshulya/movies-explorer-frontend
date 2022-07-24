@@ -1,15 +1,22 @@
 import React from "react";
+import MoviesCardButton from '../MoviesCardButton/MoviesCardButton'
+
 import './MoviesCard.css';
 
-function MoviesCard({ movie, onCardDelete}) {
+function MoviesCard({ movie, savedMovies, image, nameRU, trailer, duration, onMovieClick, isMovieSaved}) {
 
-  const {
-    nameRU, duration, trailer, image,
-  } = movie;
+  const isSaved = isMovieSaved(movie);
 
-   function handleDeleteClick() {
-     onCardDelete(movie);
-   }
+  const handleMovieClick = (e) => {
+    e.preventDefault();
+    console.log('меня нажали')
+    onMovieClick(movie, !isSaved);
+  };
+
+  const removeHandler = () => {
+    console.log('меня нажали')
+    onMovieClick(movie, false);
+  };
 
   return (
     <li className="movie">
@@ -28,9 +35,13 @@ function MoviesCard({ movie, onCardDelete}) {
           <h2 className="movie__title">{nameRU}</h2>
           <p className="movie__duration">{duration}</p>
         </div>
-        <button type="button" 
-        className="movie__save-button movie__save-button_saved movie__save-button_delete button"
-        onClick={handleDeleteClick}></button>
+        {savedMovies
+          ? <MoviesCardButton 
+              onClick={removeHandler}
+              isMovieSaved={isMovieSaved} /> 
+          : <MoviesCardButton 
+              isMovieSaved={isMovieSaved} 
+              onClick={handleMovieClick} />}
       </div>
     </li>
   );

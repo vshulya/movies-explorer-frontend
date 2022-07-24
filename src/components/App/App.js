@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import './App.css';
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -9,37 +9,54 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-import Navigation from '../Navigation/Navigation';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
-import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
-
+import moviesApi from '../../utils/MoviesApi';
 
 function App() {
 
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [allMovies, setAllMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const isMovieSaved = (movie) => savedMovies.some(i => i === movie.id);
 
   useEffect(() => {
-    setIsLoading(true);
-    moviesApi.getMovies([])
+    moviesApi
+    .getMovies()
     .then((movies) => {
-      setMovies(movies);
+      setAllMovies(movies);
     })
     .catch((err) => console.log(err))
-    .finally(() =>{
-      setIsLoading(false);
+    mainApi
+    .getSavedMovies()
+    .then((movies) => {
+      setSavedMovies(movies.Movies);
     })
-  }, [])
+    .catch((err) => console.log(err))
+  }, []);
 
-  // React.useEffect(() => {
-  //   Promise.all([api.getInitialCards(), api.getProfile()])
-  //     .then(([cards, userData]) => {
-  //       setCurrentUser(userData);
-  //       setCards(cards);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+  //saved movie
+  const handleSaveMovie = (movie) => {
+    mainApi
+      .saveMovie(movie)
+      .then((savedCard) => {
+        console.log('savedCard', savedCard)
+        const updatedSavedMovies = [...savedMovies, savedCard];
+        setSavedMovies(updatedSavedMovies);
+        //localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
+      })
+      .catch(err => console.log(err));
+  };
+ 
+  //delete movies
+  const  handleMovieDelete = (movie) => {
+     if (isMovieSaved) {
+      mainApi
+       .deleteMovie(movie._id)
+       .then(() => setSavedMovies(state => state.filter(m => m._id !== movie._id)))
+       .catch(err => console.log(err))
+    }
+  };
 
   return (
     <div className="App">
@@ -57,22 +74,25 @@ function App() {
           </Route>
           <Route 
             exact path='/movies' 
-            isLoading={isLoading}
-            movies={movies}
             element={
               <>
-                <Movies movies={movies}/>
-            </>
+                <Movies
+                allMovies={allMovies}
+                savedMovies={false}
+                onMovieClick={handleSaveMovie}
+                isMovieSaved={isMovieSaved} />
+              </>
             }>
           </Route>
           <Route 
             exact path='/saved-movies' 
             element={
               <>
-                <Navigation/>
-                <SavedMovies />
-                <Footer />
-            </>
+                <SavedMovies 
+                savedMovies={savedMovies}
+                onMovieClick={handleMovieDelete}
+                isMovieSaved={isMovieSaved} />
+              </>
             }>
           </Route>
           <Route 
@@ -80,7 +100,7 @@ function App() {
             element={
               <>
                 <Profile />
-            </>
+              </>
             }>
           </Route>
           <Route 
@@ -112,5 +132,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

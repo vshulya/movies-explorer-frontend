@@ -4,13 +4,47 @@ class MainApi {
     this._baseUrl = baseUrl;
   }
 
-  getProfile() {
-    console.log('getProfile');
-    return fetch(`${this._baseUrl}/profile`, {
-      mode: 'no-cors',
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+
+  saveMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
+      headers: this._headers(), 
+      body: JSON.stringify({
+        country: movie.country || 'unknown',
+        director: movie.director || 'unknown',
+        duration: movie.duration || 'No data',
+        year: movie.year || 'unknown',
+        description: movie.description || 'No description',
+        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        trailerLink: movie.trailerLink || 'No trailer',
+        thumbnail: `https://api.nomoreparties.co/${movie.image.url}` || 'No image',
+        movieId: movie.id || 'No data',
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN || 'No name',
+      })
+    })
+    .then(this._checkResponse)
+  };
+
+  deleteMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
+      method: 'DELETE',
       headers: this._headers()
     })
-      .then(res => {console.log('res', res)})
+    .then(this._checkResponse)
+  };
+
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: this._headers()
+    })
+    .then(this._checkResponse)
   };
 }
 
@@ -18,12 +52,14 @@ class MainApi {
     baseUrl: 'https://api.my-movies-explorer.nomoredomains.xyz',
     headers() { 
       return  {
+        "origin": "localhost:3000",
+        "Access-Control-Allow-Origin": "*",
+        'Access-Control-Allow-Credentials': 'true',
       Accept: 'application/json',
-      authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YjdlMGRjZGEzMGI4MGYxMjI3MmIiLCJpYXQiOjE2NTgyNTk0NTAsImV4cCI6MTY1ODg2NDI1MH0.aYxxq-MvyVfDGdB9w2FgqNm6svkJ6Vydj39DGNFDYrg',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YjdlMGRjZGEzMGI4MGYxMjI3MmIiLCJpYXQiOjE2NTgyNTk0NTAsImV4cCI6MTY1ODg2NDI1MH0.aYxxq-MvyVfDGdB9w2FgqNm6svkJ6Vydj39DGNFDYrg',
       'Content-Type': 'application/json'
-    }
+      }
     }
   });
 
-  
   export default mainApi;
