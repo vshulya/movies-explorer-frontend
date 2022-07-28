@@ -1,21 +1,22 @@
 import React from "react";
 import MoviesCardButton from '../MoviesCardButton/MoviesCardButton'
+import MoviesCardButtonDelete from '../MoviesCardButtonDelete/MoviesCardButtonDelete'
 
 import './MoviesCard.css';
 
-function MoviesCard({ movie, savedMovies, image, nameRU, trailer, duration, onMovieClick, isMovieSaved}) {
+function MoviesCard({ movie, savedMovies, image, nameRU, trailer, duration, onMovieDelete, onMovieSave, isMovieSaved}) {
 
   const isSaved = isMovieSaved(movie);
 
-  const handleMovieClick = (e) => {
+  const handleSaveMovieClick = (e) => {
     e.preventDefault();
-    console.log('меня нажали')
-    onMovieClick(movie, !isSaved);
+    console.log('меня нажали handleSaveMovieClick')
+    onMovieSave(movie);
   };
 
-  const removeHandler = () => {
-    console.log('меня нажали')
-    onMovieClick(movie, false);
+  const handleDeleteMovieClick = () => {
+    debugger
+    onMovieDelete(movie);
   };
 
   return (
@@ -36,12 +37,12 @@ function MoviesCard({ movie, savedMovies, image, nameRU, trailer, duration, onMo
           <p className="movie__duration">{duration}</p>
         </div>
         {savedMovies
-          ? <MoviesCardButton 
-              onClick={removeHandler}
-              isMovieSaved={isMovieSaved} /> 
+          ? <MoviesCardButtonDelete 
+              onClick={handleDeleteMovieClick}/> 
           : <MoviesCardButton 
-              isMovieSaved={isMovieSaved} 
-              onClick={handleMovieClick} />}
+              isSaved={isSaved}
+              onMovieDelete={onMovieDelete}
+              onClick={isSaved ? handleDeleteMovieClick : handleSaveMovieClick} />}
       </div>
     </li>
   );

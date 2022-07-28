@@ -15,33 +15,75 @@ import moviesApi from '../../utils/MoviesApi';
 
 function App() {
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState(false);
+
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
-  const isMovieSaved = (movie) => savedMovies.some(i => i === movie.id);
+  const [query, setQuery]= useState('');
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
+
+  const isMovieSaved = (movie) => savedMovies.some(sm => {
+    return sm.id === movie.id
+  });
+
 
   useEffect(() => {
+    setIsLoading(true);
     moviesApi
     .getMovies()
     .then((movies) => {
       setAllMovies(movies);
     })
-    .catch((err) => console.log(err))
     mainApi
     .getSavedMovies()
     .then((movies) => {
       setSavedMovies(movies.Movies);
     })
     .catch((err) => console.log(err))
+    .finally(() => {
+     setIsLoading(false);
+    })
   }, []);
 
+  const searchFilter = (data, searchQuery) => {
+    if (searchQuery) {
+      const regex = new RegExp(searchQuery, 'gi');
+      const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
+        if (filterData.length === 0) {
+          setLoadingError('Ничего не найдено');
+        } else {
+          setLoadingError('');
+      }
+      return filterData;
+    }
+    return [];
+  };
+
+  const searchHandler = (searchQuery) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      console.log('Searching for movies')
+      setQuery(searchQuery);
+      setFilteredMovies(searchFilter(allMovies, searchQuery));
+      setIsLoading(false);
+    }, 600);
+  };
+
+  useEffect(() => {
+    setFilteredSavedMovies(searchFilter(savedMovies, query));
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies]);
+
   //saved movie
-  const handleSaveMovie = (movie) => {
+  const handleMovieSave = (movie) => {
     mainApi
       .saveMovie(movie)
-      .then((savedCard) => {
-        console.log('savedCard', savedCard)
-        const updatedSavedMovies = [...savedMovies, savedCard];
+      .then((res) => {
+        const updatedSavedMovies = [...savedMovies, { ...res, id: res.movieId }];
+        debugger
         setSavedMovies(updatedSavedMovies);
         //localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
       })
@@ -50,12 +92,11 @@ function App() {
  
   //delete movies
   const  handleMovieDelete = (movie) => {
-     if (isMovieSaved) {
+    const movieId = savedMovies.find((item) => item.id === movie.id)._id;
       mainApi
-       .deleteMovie(movie._id)
-       .then(() => setSavedMovies(state => state.filter(m => m._id !== movie._id)))
-       .catch(err => console.log(err))
-    }
+        .deleteMovie(movieId)
+        .then(() => setSavedMovies(state => state.filter(m => m._id !== movieId)))
+        .catch(err => console.log(err))
   };
 
   return (
@@ -77,10 +118,14 @@ function App() {
             element={
               <>
                 <Movies
-                allMovies={allMovies}
+                movies={filteredMovies}
                 savedMovies={false}
-                onMovieClick={handleSaveMovie}
-                isMovieSaved={isMovieSaved} />
+                onMovieSave={handleMovieSave}
+                onMovieDelete={handleMovieDelete}
+                isMovieSaved={isMovieSaved} 
+                onSubmitSearch={searchHandler}
+                isLoading={isLoading}
+                loadingError={loadingError}/>
               </>
             }>
           </Route>
@@ -89,9 +134,12 @@ function App() {
             element={
               <>
                 <SavedMovies 
-                savedMovies={savedMovies}
-                onMovieClick={handleMovieDelete}
-                isMovieSaved={isMovieSaved} />
+                savedMovies
+                movies={savedMovies}
+                onMovieDelete={handleMovieDelete}
+                isMovieSaved={isMovieSaved} 
+                isLoading={isLoading}
+                loadingError={loadingError}/>
               </>
             }>
           </Route>

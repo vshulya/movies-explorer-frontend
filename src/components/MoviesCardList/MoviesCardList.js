@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/constants';
 
 
-function MoviesCardList({allMovies, savedMovies, onMovieClick, isMovieSaved}) {
+function MoviesCardList({movies, moviesInSaved, savedMovies, onMovieSave, onMovieDelete, isMovieSaved}) {
 
   const [renderedMovies, setRenderedMovies] = useState([]);
   const [idx, setIdx] = useState(0);
@@ -23,8 +23,8 @@ function MoviesCardList({allMovies, savedMovies, onMovieClick, isMovieSaved}) {
   };
 
   const renderMovies = () => {
-    const count = Math.min(allMovies.length, idx + extraRow);
-    const extraMovies = allMovies.slice(idx, count);
+    const count = Math.min(movies.length, idx + extraRow);
+    const extraMovies = movies.slice(idx, count);
     setRenderedMovies([...renderedMovies, ...extraMovies]);
     setIdx(count);
   };
@@ -43,13 +43,13 @@ function MoviesCardList({allMovies, savedMovies, onMovieClick, isMovieSaved}) {
   }, []);
   
   useEffect(() => {
-    if(!allMovies) return;
+    if(!movies) return;
     const windowSize = window.innerWidth;
     setExtraRow(getCount(windowSize).extra);
-    const count = Math.min(allMovies.length, getCount(windowSize).first);
-    setRenderedMovies(allMovies.slice(0, count));
+    const count = Math.min(movies.length, getCount(windowSize).first);
+    setRenderedMovies(movies.slice(0, count));
     setIdx(count);
-  }, [allMovies]);
+  }, [movies]);
 
   const renderMore = () => renderMovies();
 
@@ -60,40 +60,98 @@ function MoviesCardList({allMovies, savedMovies, onMovieClick, isMovieSaved}) {
   }
   const isInAllMovies = location.pathname === '/movies';
   return (
-    <div className="movies">
-      <ul className="movies__list">
-            {isInAllMovies ? (
-              renderedMovies.map((movie) => (
-                  <MoviesCard
-                      key={movie.id}
-                      movie={movie} 
-                      image={`https://api.nomoreparties.co/${movie.image.url}`}
-                      nameRU = {movie.nameRU}
-                      duration = {calcDuration(movie.duration)}
-                      trailer = {movie.trailerLink}
-                      savedMovies={savedMovies}
-                      isMovieSaved={isMovieSaved}
-                      onMovieClick={onMovieClick}
-                      />
-              ))
-            ) : (savedMovies.map((movie) => (
-                  <MoviesCard
-                      key={movie._id}
-                      movie={movie} 
-                      image={movie.image}
-                      nameRU = {movie.nameRU}
-                      duration = {calcDuration(movie.duration)}
-                      trailer = {movie.trailerLink}
-                      savedMovies={savedMovies}
-                      isMovieSaved={isMovieSaved}
-                      onMovieClick={onMovieClick}
-                      />)
-              ))
-            }
-      </ul>
-      { isInAllMovies? idx < allMovies.length && <button onClick={renderMore} className="movies__button">Ещё</button> : ""}
-    </div>
-  );
+  <div className="movies">
+    <ul className="movies__list">
+          {isInAllMovies ? (
+            renderedMovies.map((movie) => (
+                <MoviesCard
+                    key={movie.id}
+                    movie={movie} 
+                    image={`https://api.nomoreparties.co/${movie.image.url}`}
+                    nameRU = {movie.nameRU}
+                    duration = {calcDuration(movie.duration)}
+                    trailer = {movie.trailerLink}
+                    savedMovies={savedMovies}
+                    isMovieSaved={isMovieSaved}
+                    onMovieSave={onMovieSave}
+                    onMovieDelete={onMovieDelete}
+                    />
+            ))
+          ) : (moviesInSaved.map((movie) => (
+                <MoviesCard
+                    key={movie._id}
+                    movie={movie} 
+                    image={movie.image}
+                    nameRU = {movie.nameRU}
+                    duration = {calcDuration(movie.duration)}
+                    trailer = {movie.trailerLink}
+                    savedMovies={savedMovies}
+                    isMovieSaved={isMovieSaved}
+                    onMovieDelete={onMovieDelete}
+                    />)
+            ))
+          }
+    </ul>
+    { isInAllMovies? idx < movies.length && <button onClick={renderMore} className="movies__button">Ещё</button> : ""}
+  </div>
+);
+  // return (
+  //   <div className="movies">
+  //     <ul className="movies__list">
+  //           {renderedMovies.map((movie) => (
+  //                 <MoviesCard
+  //                     key={movie.id}
+  //                     movie={movie} 
+  //                     image={isInAllMovies ? (`https://api.nomoreparties.co/${movie.image.url}`) : (movie.image)}
+  //                     nameRU = {movie.nameRU}
+  //                     duration = {calcDuration(movie.duration)}
+  //                     trailer = {movie.trailerLink}
+  //                     savedMovies={savedMovies}
+  //                     isMovieSaved={isMovieSaved}
+  //                     onMovieClick={onMovieClick}
+  //                     />
+  //             ))
+  //           }
+  //     </ul>
+  //     { isInAllMovies? idx < movies.length && <button onClick={renderMore} className="movies__button">Ещё</button> : ""}
+  //   </div>
+  // );
 }
 
 export default MoviesCardList;
+
+// return (
+//   <div className="movies">
+//     <ul className="movies__list">
+//           {isInAllMovies ? (
+//             renderedMovies.map((movie) => (
+//                 <MoviesCard
+//                     key={movie.id}
+//                     movie={movie} 
+//                     image={`https://api.nomoreparties.co/${movie.image.url}`}
+//                     nameRU = {movie.nameRU}
+//                     duration = {calcDuration(movie.duration)}
+//                     trailer = {movie.trailerLink}
+//                     savedMovies={savedMovies}
+//                     isMovieSaved={isMovieSaved}
+//                     onMovieClick={onMovieClick}
+//                     />
+//             ))
+//           ) : (moviesInSaved.map((movie) => (
+//                 <MoviesCard
+//                     key={movie._id}
+//                     movie={movie} 
+//                     image={movie.image}
+//                     nameRU = {movie.nameRU}
+//                     duration = {calcDuration(movie.duration)}
+//                     trailer = {movie.trailerLink}
+//                     savedMovies={savedMovies}
+//                     isMovieSaved={isMovieSaved}
+//                     onMovieClick={onMovieClick}
+//                     />)
+//             ))
+//           }
+//     </ul>
+//     { isInAllMovies? idx < movies.length && <button onClick={renderMore} className="movies__button">Ещё</button> : ""}
+//   </div>
+// );

@@ -56,7 +56,7 @@ class MainApi {
         "Access-Control-Allow-Origin": "*",
         'Access-Control-Allow-Credentials': 'true',
       Accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YjdlMGRjZGEzMGI4MGYxMjI3MmIiLCJpYXQiOjE2NTgyNTk0NTAsImV4cCI6MTY1ODg2NDI1MH0.aYxxq-MvyVfDGdB9w2FgqNm6svkJ6Vydj39DGNFDYrg',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YjdlMGRjZGEzMGI4MGYxMjI3MmIiLCJpYXQiOjE2NTg5MjYzMjIsImV4cCI6MTY1OTUzMTEyMn0.fvKFt01M5FmK4gB-aXKsIPbmIbifmo9F2tEFmgz6yAc',
       'Content-Type': 'application/json'
       }
     }

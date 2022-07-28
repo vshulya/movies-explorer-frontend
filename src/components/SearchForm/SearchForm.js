@@ -1,25 +1,51 @@
 import React, {useState} from "react";
 import './SearchForm.css';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 import search_icon from '../../images/search_icon.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({previousSearchText, onFilterClick}) {
+function SearchForm({onFilterClick, onSearch, isLoading}) {
 
-  const [searchText, setSearchText] = useState(previousSearchText);
+  const [query, setQuery]= useState('');
+
+  //const formWithValidation = useFormWithValidation();
+  //const { searchText } = formWithValidation.values;
+  //const { handleChange, resetForm } = formWithValidation;
+  const [error, setError] = React.useState('');
+
+  // React.useEffect(() => {
+  //   resetForm();
+  // }, [resetForm]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!query) {
+      setError('Нужно ввести ключевое слово');
+      setTimeout(() => {
+        setError('');
+      }, 2000);
+    } else {
+      onSearch(query);
+      //resetForm();
+    }
+  };
 
   return (
     <div className="searchForm">
-      <form className="searchForm__form">
+      <form className="searchForm__form" onSubmit={handleSubmit}>
         <input className="searchForm__input"
-        type="search"
         name="search-form"
         id="search-form" 
         placeholder="Фильм" 
-        value={searchText || ''} 
-        onChange={e => setSearchText(e.target.value)}
+        value={query}
+        type="search"
+        onChange={(e) => setQuery(e.target.value)}
+        autoComplete="off"
         required />
         <button className="searchForm__button button" 
-        type="submit">
+        type="submit"
+        onSubmit={handleSubmit}>
+        {error && <span className="searchForm_error">{error}</span>}
             <img src={search_icon} alt="значок поиска" className="searchForm__search"/>
         </button>
       </form>    
