@@ -29,24 +29,106 @@ function App() {
     return sm.id === movie.id
   });
 
-
-  useEffect(() => {
-    setIsLoading(true);
+  //grab all movies from MovieApi
+  const fetchMovies = () => {
     moviesApi
     .getMovies()
     .then((movies) => {
       setAllMovies(movies);
+      localStorage.setItem('allMovies', JSON.stringify(movies))
     })
+    .catch(err => console.log(err));
+  };
+
+  //grab saved movies from MainApi
+  const fetchSavedMovies = () => {
     mainApi
     .getSavedMovies()
     .then((movies) => {
       setSavedMovies(movies.Movies);
+      localStorage.setItem('savedMovies', JSON.stringify(movies))
     })
     .catch((err) => console.log(err))
-    .finally(() => {
-     setIsLoading(false);
-    })
+  };
+
+  const getAllMovies = () => {
+    const localMovies = localStorage.getItem('allMovies');
+    if(localMovies){
+      try {
+        const parsedMovies = (JSON.parse(localMovies))
+        setAllMovies(parsedMovies)
+      //if there is an error we clean localStorage and take movies from API
+      } catch(err) {
+        localStorage.removeItem('allMovies');
+        fetchMovies();
+      }
+    } else {
+      fetchMovies();
+    }
+  };
+
+  const getSavedMovies = () => {
+    const localSavedMovies = localStorage.getItem('savedMovies');
+    if(localSavedMovies){
+      try {
+        const parsedMovies = (JSON.parse(localSavedMovies))
+        setSavedMovies(parsedMovies)
+      //if there is an error we clean localStorage and take movies from API
+      } catch(err) {
+        localStorage.removeItem('savedMovies');
+        fetchSavedMovies();
+      }
+    } else {
+      fetchSavedMovies();
+    }
+  };
+
+  useEffect(() => {
+    getAllMovies();
+    getSavedMovies();
   }, []);
+
+  // useEffect(() => {
+  //   const localMovies = localStorage.getItem('allMovies');
+  //   if(localMovies){
+  //     try {
+  //       const parsedMovies = (JSON.parse(localMovies))
+  //       console.log('parsedMovies', parsedMovies)
+  //       setAllMovies(parsedMovies)
+  //     //if there is an error we clean localStorage and take movies from API
+  //     } catch(err) {
+  //       localStorage.removeItem('allMovies');
+  //       fetchMovies();
+  //     }
+  //   } else {
+  //     fetchMovies();
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   const localMovies = localStorage.getItem('allMovies');
+  //   setIsLoading(true);
+  //   if(localMovies){
+  //     try {
+  //       setAllMovies(JSON.parse(localMovies))
+  //     //if there is an error we clean localStorage and take movies from API
+  //     } catch(err) {
+  //       localStorage.removeItem('allMovies');
+  //       fetchAllMovies();
+  //     }
+  //   } else {
+  //     fetchAllMovies()
+  //   }
+  //   mainApi
+  //   .getSavedMovies()
+  //   .then((movies) => {
+  //     setSavedMovies(movies.Movies);
+  //   })
+  //   .catch((err) => console.log(err))
+  //   .finally(() => {
+  //     setIsLoading(false);
+  //   })
+  // }, []);
 
   const searchFilter = (data, searchQuery) => {
     if (searchQuery) {
@@ -72,10 +154,10 @@ function App() {
     }, 600);
   };
 
-  useEffect(() => {
-    setFilteredSavedMovies(searchFilter(savedMovies, query));
-    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies]);
+  // useEffect(() => {
+  //   setFilteredSavedMovies(searchFilter(savedMovies, query));
+  //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  // }, [savedMovies]);
 
   //saved movie
   const handleMovieSave = (movie) => {
@@ -83,9 +165,9 @@ function App() {
       .saveMovie(movie)
       .then((res) => {
         const updatedSavedMovies = [...savedMovies, { ...res, id: res.movieId }];
-        debugger
         setSavedMovies(updatedSavedMovies);
-        //localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
+        console.log(updatedSavedMovies);
+        localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
       })
       .catch(err => console.log(err));
   };

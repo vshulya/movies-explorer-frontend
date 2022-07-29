@@ -15,7 +15,7 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
 
   useEffect(() => {
     setFilteredSavedMovies(movies);
-  }, [savedMovies]);
+  }, [movies]);
 
   const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration <= 40);
 

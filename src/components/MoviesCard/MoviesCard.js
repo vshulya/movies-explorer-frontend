@@ -15,7 +15,6 @@ function MoviesCard({ movie, savedMovies, image, nameRU, trailer, duration, onMo
   };
 
   const handleDeleteMovieClick = () => {
-    debugger
     onMovieDelete(movie);
   };
 

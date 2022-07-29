@@ -14,12 +14,18 @@ function MoviesCardList({movies, moviesInSaved, savedMovies, onMovieSave, onMovi
   const location = useLocation();
 
   const getCount = (windowSize) => {
-    if (windowSize >= DESKTOP_WIDTH) {
+    if (windowSize > DESKTOP_WIDTH) {
+      return { first: 12, extra: 4 };
+    } 
+    if (windowSize > TABLET_WIDTH && windowSize <= DESKTOP_WIDTH) {
       return { first: 12, extra: 3 };
-    } if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
+    }
+    if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
       return { first: 8, extra: 2 };
     }
-    return { first: 5, extra: 2 };
+    else {
+      return { first: 5, extra: 2 };
+    }
   };
 
   const renderMovies = () => {
