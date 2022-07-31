@@ -1,0 +1,6 @@
+.movies__error {
+  display: flex;
+  font-size: 14px;
+  line-height: 18px;
+  justify-content: center;
+}

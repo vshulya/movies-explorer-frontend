@@ -6,14 +6,16 @@ import Navigation from "../Navigation/Navigation";
 import Footer from "../Footer/Footer";
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoading}) {
+function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoading, isNoResult}) {
 
+  const [allSavedMovies, setAllSavedMovies] = useState([]);
   // filter short movies
   const [filterIsOn, setFilterIsOn] = useState(false);
   // search in saved movies
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
 
   useEffect(() => {
+    setAllSavedMovies(movies);
     setFilteredSavedMovies(movies);
   }, [movies]);
 
@@ -41,12 +43,18 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
       <SearchForm 
         onFilterClick={onFilterClick}
         onSearch={searchHandler}/>
-        {isLoading &&<Preloader/>}
+      {isLoading && <Preloader/>}
+      {!isLoading && isNoResult === ''
+      && (
       <MoviesCardList 
         savedMovies={savedMovies}
         moviesInSaved={filterIsOn ? filterShortFilm(filteredSavedMovies) : filteredSavedMovies}
         onMovieDelete={onMovieDelete}
-        isMovieSaved={isMovieSaved} />
+        isMovieSaved={isMovieSaved} />)}
+      {!isLoading
+        && isNoResult !== ''
+        && <div className="movies__error">{isNoResult}</div>
+      }
       <Footer/>
   </>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import './App.css';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import Header from "../Header/Header";
@@ -12,11 +13,18 @@ import Login from '../Login/Login';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState(null);
+  const [userName, setUserName] = useState(null);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [loadingError, setLoadingError] = useState(false);
+  const [isNoResult, setIsNoResult] = useState(false);
+  const [isLoadingError, setIsLoadingError] = useState(false);
 
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -25,9 +33,47 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
 
+  const navigate = useNavigate();
+
   const isMovieSaved = (movie) => savedMovies.some(sm => {
     return sm.id === movie.id
   });
+
+    // Setting up token operation
+    const handleRegister = (email, password, name) => {
+      return mainApi
+        .register(email, password, name)
+        .then(() => {
+          isLoading(true);
+          navigate("/signin")
+        })
+        .catch(() => {
+          isLoading(false);
+        })
+    };
+
+    const switchToLoggedIn = (email) => {
+      setLoggedIn(true);
+      setUserEmail(email);
+      navigate("/movies");
+      return loggedIn
+    };
+
+    const handleLogin = (email, password) => {
+      return mainApi
+        .authorize(email, password)
+        .then((data) => {
+          if (!data.token) {
+            return
+          } else {localStorage.setItem('jwt', data.token);
+          switchToLoggedIn(email);
+            }
+        })
+        .catch(() => {
+        })
+    };
+  
+
 
   //grab all movies from MovieApi
   const fetchMovies = () => {
@@ -51,7 +97,8 @@ function App() {
     .catch((err) => console.log(err))
   };
 
-  const getAllMovies = () => {
+  useEffect(() => {
+    //check if a movie in localStorage
     const localMovies = localStorage.getItem('allMovies');
     if(localMovies){
       try {
@@ -60,14 +107,18 @@ function App() {
       //if there is an error we clean localStorage and take movies from API
       } catch(err) {
         localStorage.removeItem('allMovies');
+        setIsLoadingError('Во время запроса произошла ошибка. '
+        + 'Возможно, проблема с соединением или сервер недоступен. '
+        + 'Подождите немного и попробуйте ещё раз');
         fetchMovies();
       }
     } else {
       fetchMovies();
     }
-  };
+  }, []);
 
-  const getSavedMovies = () => {
+  useEffect(() => {
+    //check if a movie in localStorage
     const localSavedMovies = localStorage.getItem('savedMovies');
     if(localSavedMovies){
       try {
@@ -76,68 +127,32 @@ function App() {
       //if there is an error we clean localStorage and take movies from API
       } catch(err) {
         localStorage.removeItem('savedMovies');
+        setIsLoadingError('Во время запроса произошла ошибка. '
+        + 'Возможно, проблема с соединением или сервер недоступен. '
+        + 'Подождите немного и попробуйте ещё раз');
         fetchSavedMovies();
       }
     } else {
       fetchSavedMovies();
     }
-  };
-
-  useEffect(() => {
-    getAllMovies();
-    getSavedMovies();
   }, []);
 
   // useEffect(() => {
-  //   const localMovies = localStorage.getItem('allMovies');
-  //   if(localMovies){
-  //     try {
-  //       const parsedMovies = (JSON.parse(localMovies))
-  //       console.log('parsedMovies', parsedMovies)
-  //       setAllMovies(parsedMovies)
-  //     //if there is an error we clean localStorage and take movies from API
-  //     } catch(err) {
-  //       localStorage.removeItem('allMovies');
-  //       fetchMovies();
-  //     }
-  //   } else {
-  //     fetchMovies();
-  //   }
+  //   getAllMovies();
+  //   getSavedMovies();
   // }, []);
 
-  // useEffect(() => {
-  //   const localMovies = localStorage.getItem('allMovies');
-  //   setIsLoading(true);
-  //   if(localMovies){
-  //     try {
-  //       setAllMovies(JSON.parse(localMovies))
-  //     //if there is an error we clean localStorage and take movies from API
-  //     } catch(err) {
-  //       localStorage.removeItem('allMovies');
-  //       fetchAllMovies();
-  //     }
-  //   } else {
-  //     fetchAllMovies()
-  //   }
-  //   mainApi
-  //   .getSavedMovies()
-  //   .then((movies) => {
-  //     setSavedMovies(movies.Movies);
-  //   })
-  //   .catch((err) => console.log(err))
-  //   .finally(() => {
-  //     setIsLoading(false);
-  //   })
-  // }, []);
 
   const searchFilter = (data, searchQuery) => {
     if (searchQuery) {
       const regex = new RegExp(searchQuery, 'gi');
       const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
         if (filterData.length === 0) {
-          setLoadingError('Ничего не найдено');
+          setIsNoResult('Ничего не найдено');
         } else {
-          setLoadingError('');
+          localStorage.setItem('searchQuery', JSON.stringify(searchQuery))
+          setFilteredMovies(JSON.parse(localStorage.getItem('searchQuery')));
+          setIsNoResult('');
       }
       return filterData;
     }
@@ -147,17 +162,12 @@ function App() {
   const searchHandler = (searchQuery) => {
     setIsLoading(true);
     setTimeout(() => {
-      console.log('Searching for movies')
       setQuery(searchQuery);
       setFilteredMovies(searchFilter(allMovies, searchQuery));
       setIsLoading(false);
     }, 600);
   };
 
-  // useEffect(() => {
-  //   setFilteredSavedMovies(searchFilter(savedMovies, query));
-  //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  // }, [savedMovies]);
 
   //saved movie
   const handleMovieSave = (movie) => {
@@ -166,7 +176,6 @@ function App() {
       .then((res) => {
         const updatedSavedMovies = [...savedMovies, { ...res, id: res.movieId }];
         setSavedMovies(updatedSavedMovies);
-        console.log(updatedSavedMovies);
         localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
       })
       .catch(err => console.log(err));
@@ -177,67 +186,84 @@ function App() {
     const movieId = savedMovies.find((item) => item.id === movie.id)._id;
       mainApi
         .deleteMovie(movieId)
-        .then(() => setSavedMovies(state => state.filter(m => m._id !== movieId)))
+        .then(() => {
+          const updatedSavedMovies = savedMovies.filter(m => m._id !== movieId)
+          setSavedMovies(updatedSavedMovies);
+          localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
+        })
         .catch(err => console.log(err))
   };
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="App">
-      <Router>
         <Routes>
           <Route 
               exact path='/' 
               element={
+                <ProtectedRoute loggedIn={loggedIn}>
                 <>
-                  <Header/>
+                  <Header
+                    loggedIn={loggedIn}/>
                   <Main />
                   <Footer/>
                 </>
+                </ProtectedRoute>
             }>
           </Route>
           <Route 
             exact path='/movies' 
             element={
-              <>
-                <Movies
-                movies={filteredMovies}
-                savedMovies={false}
-                onMovieSave={handleMovieSave}
-                onMovieDelete={handleMovieDelete}
-                isMovieSaved={isMovieSaved} 
-                onSubmitSearch={searchHandler}
-                isLoading={isLoading}
-                loadingError={loadingError}/>
-              </>
+              <ProtectedRoute loggedIn={loggedIn}>
+                <>
+                  <Movies
+                  loggedIn={loggedIn}
+                  movies={filteredMovies}
+                  savedMovies={false}
+                  onMovieSave={handleMovieSave}
+                  onMovieDelete={handleMovieDelete}
+                  isMovieSaved={isMovieSaved} 
+                  onSubmitSearch={searchHandler}
+                  isLoading={isLoading}
+                  isNoResult={isNoResult}/>
+                </>
+              </ProtectedRoute>
             }>
           </Route>
           <Route 
             exact path='/saved-movies' 
             element={
-              <>
-                <SavedMovies 
-                savedMovies
-                movies={savedMovies}
-                onMovieDelete={handleMovieDelete}
-                isMovieSaved={isMovieSaved} 
-                isLoading={isLoading}
-                loadingError={loadingError}/>
-              </>
+              <ProtectedRoute loggedIn={loggedIn}>
+                <>
+                  <SavedMovies 
+                  loggedIn={loggedIn}
+                  savedMovies
+                  movies={savedMovies}
+                  onMovieDelete={handleMovieDelete}
+                  isMovieSaved={isMovieSaved} 
+                  isLoading={isLoading}
+                  isNoResult={isNoResult}/>
+                </>
+              </ProtectedRoute>
             }>
           </Route>
           <Route 
             exact path='/profile' 
             element={
-              <>
-                <Profile />
-              </>
+              <ProtectedRoute loggedIn={loggedIn}>
+                <>
+                  <Profile 
+                  loggedIn={loggedIn}/>
+                </>
+              </ProtectedRoute>
             }>
           </Route>
           <Route 
             exact path='/signup' 
             element={
               <>
-                <Register />
+                <Register 
+                handleRegister={handleRegister}/>
               </>
             }>
           </Route>
@@ -245,7 +271,8 @@ function App() {
             exact path='/signin' 
             element={
               <>
-                <Login />
+                <Login 
+                  handleLogin={handleLogin}/>
               </>
             }>
           </Route>
@@ -258,8 +285,8 @@ function App() {
             }>
           </Route>
         </Routes>
-      </Router>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 export default App;
