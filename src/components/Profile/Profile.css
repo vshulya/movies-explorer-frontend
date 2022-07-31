@@ -123,9 +123,10 @@
   color: #FFFFFF;
 }
 
-.profile__logout-button {
+.profile__logout-link {
   border: none;
   background-color: transparent;
   font-size: 13px;
   color: #EE3465;
+  text-decoration: none;
 }

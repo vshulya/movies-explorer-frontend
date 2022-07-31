@@ -1,20 +1,56 @@
-import React from "react";
-import Navigation from "../Navigation/Navigation";
+import React, {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
 
-function Profile(props) {
+function Profile({onUpdateUser, onLogOut}) {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  // Подписка на контекст
+  const currentUser = React.useContext(CurrentUserContext);
+
+  // После загрузки текущего пользователя из API
+  // его данные будут использованы в управляемых компонентах.
+  useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
+
+  // Обработчик изменения инпута обновляет стейт
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
+
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name,
+      email
+    });
+  } 
+
   return (
     <section className="profile">
-      <Navigation/>
       <div className="profile__container">
-        <h2 className="profile__title">Привет, Валентина!</h2>
-        <form className="profile__form">
+        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+        <form className="profile__form"
+        onSubmit={handleSubmit}>
           <fieldset className='profile__fieldset'>
             <label className="profile__field">Имя
               <input
-                type="name"
-                defaultValue={'Валентина'}
+                type="text"
+                value={name || ''} 
+                onChange={handleNameChange}
                 id="name-input"
                 placeholder="Имя"
                 name="name"
@@ -26,7 +62,8 @@ function Profile(props) {
               <label className="profile__field">Email
               <input
                 type="email"
-                defaultValue={'test@test.com'}
+                value={email || ''} 
+                onChange={handleEmailChange}
                 placeholder="Email"
                 id="email-input"
                 name="email"
@@ -35,8 +72,8 @@ function Profile(props) {
             </label>
           </fieldset>
           <div className="profile__buttons">
-            <button className="profile__edit-button button">Редактировать</button>
-            <button className="profile__logout-button button">Выйти из аккаунта</button>
+            <button className="profile__edit-button button" type="submit">Редактировать</button>
+            <Link className="profile__logout-link link" onClick={onLogOut} to="/signin">Выйти из аккаунта</Link>
           </div>
         </form>
       </div>

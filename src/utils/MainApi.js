@@ -14,9 +14,7 @@ class MainApi {
   register(email, password, name) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: this._headers(),
       body: JSON.stringify({ email, password, name})
     })
       .then(this._checkResponse)
@@ -25,21 +23,23 @@ class MainApi {
   authorize (email, password) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: this._headers(),
       body: JSON.stringify({ email, password })
     })
       .then(this._checkResponse)
   }
 
-  editProfile(email, name) {
+  editProfile(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers(),
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify({
-        email, 
-        name
+        name, 
+        email
       })
     })
       .then(this._checkResponse)
@@ -49,9 +49,22 @@ class MainApi {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
-        // Accept: "application/json",
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }
+    })
+      .then(this._checkResponse)
+  }
+
+  //check token
+  getContent (token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     })
       .then(this._checkResponse)
@@ -60,7 +73,11 @@ class MainApi {
   saveMovie(movie) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
-      headers: this._headers(), 
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }, 
       body: JSON.stringify({
         country: movie.country || 'unknown',
         director: movie.director || 'unknown',
@@ -81,14 +98,22 @@ class MainApi {
   deleteMovie(id) {
     return fetch(`${this._baseUrl}/movies/${id}`, {
       method: 'DELETE',
-      headers: this._headers()
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     })
     .then(this._checkResponse)
   };
 
   getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
-      headers: this._headers()
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     })
     .then(this._checkResponse)
   };
@@ -99,13 +124,11 @@ class MainApi {
     headers() { 
       return  {
         "origin": "localhost:3000",
-        "Access-Control-Allow-Origin": "*",
-        'Access-Control-Allow-Credentials': 'true',
-      Accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YjdlMGRjZGEzMGI4MGYxMjI3MmIiLCJpYXQiOjE2NTg5MjYzMjIsImV4cCI6MTY1OTUzMTEyMn0.fvKFt01M5FmK4gB-aXKsIPbmIbifmo9F2tEFmgz6yAc',
-      'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       }
     }
   });
 
   export default mainApi;
+  // `Bearer ${localStorage.getItem('jwt')}`

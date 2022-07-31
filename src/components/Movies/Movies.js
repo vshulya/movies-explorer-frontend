@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import Preloader from '../Preloader/Preloader';
 import './Movies.css';
 
@@ -43,7 +41,6 @@ function Movies({isNoResult, movies, savedMovies, onMovieSave, onMovieDelete, is
   
   return (
     <>
-      <Header/>
       <SearchForm 
         onFilterClick={onFilterClick} 
         onSearch={onSubmitSearch}
@@ -62,7 +59,6 @@ function Movies({isNoResult, movies, savedMovies, onMovieSave, onMovieDelete, is
         && isNoResult !== ''
         && <div className="movies__error">{isNoResult}</div>
       }
-      <Footer/>
     </>
   )
 };

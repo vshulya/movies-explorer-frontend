@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import './SavedMovies.css';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Navigation from "../Navigation/Navigation";
-import Footer from "../Footer/Footer";
 import Preloader from '../Preloader/Preloader';
 
 function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoading, isNoResult}) {
@@ -39,12 +37,11 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
 
   return (
     <>
-      <Navigation/>
       <SearchForm 
         onFilterClick={onFilterClick}
         onSearch={searchHandler}/>
       {isLoading && <Preloader/>}
-      {!isLoading && isNoResult === ''
+      {!isLoading && !isNoResult
       && (
       <MoviesCardList 
         savedMovies={savedMovies}
@@ -52,10 +49,9 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
         onMovieDelete={onMovieDelete}
         isMovieSaved={isMovieSaved} />)}
       {!isLoading
-        && isNoResult !== ''
+        && isNoResult
         && <div className="movies__error">{isNoResult}</div>
       }
-      <Footer/>
   </>
   );
 }

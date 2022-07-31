@@ -4,7 +4,7 @@ import Logo from '../Logo/Logo';
 import { Link } from "react-router-dom";
 import HamburgerMenuModal from '../HamburgerMenuModal/HamburgerMenuModal'
 
-function Navigation(props) {
+function Navigation({userEmail}) {
 
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = React.useState(false);
 
@@ -56,7 +56,7 @@ function Navigation(props) {
               <Link className="nav__link link" to="/saved-movies">Сохранённые фильмы</Link>
             </nav>
             </div>
-            <button className="nav__button button">Аккаунт</button>
+            <Link  className="nav__profile-link link" to="/profile">{userEmail}</Link>
       </div>
     </>
   );
