@@ -4,30 +4,21 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import './Movies.css';
 
-function Movies({isNoResult, movies, savedMovies, onMovieSave, onMovieDelete, isMovieSaved, isLoading, onSubmitSearch }) {
+function Movies({filterIsOn, onFilterClick, isNoResult, movies, savedMovies, onMovieSave, onMovieDelete, isMovieSaved, isLoading, onSubmitSearch }) {
 
-  const [filterIsOn, setFilterIsOn] = useState(false);
+  //const [filterIsOn, setFilterIsOn] = useState(false);
 
   const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration <= 40);
 
-  const onFilterClick = () => {
-    if(!filterIsOn){
-      setFilterIsOn(true);
-      localStorage.setItem('filterIsOn', 'true');
-    } else {
-      setFilterIsOn(false);
-      localStorage.setItem('filterIsOn', 'false');
-    }
-  };
 
-  useEffect(() => {
-    const filterInLocalStorage = localStorage.getItem('filterIsOn');
-    if(filterInLocalStorage){
-      setFilterIsOn(filterInLocalStorage);
-      //localStorage.removeItem('filterIsOn');
-    }
-    setFilterIsOn();
-  }, [])
+  // useEffect(() => {
+  //   const filterInLocalStorage = localStorage.getItem('filterIsOn');
+  //   if(filterInLocalStorage){
+  //     setFilterIsOn(filterInLocalStorage);
+  //     //localStorage.removeItem('filterIsOn');
+  //   }
+  //   setFilterIsOn();
+  // }, [])
 
   // useEffect(() => {
   //   const filterLocalStore = localStorage.getItem('filterIsOn');

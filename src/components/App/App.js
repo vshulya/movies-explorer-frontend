@@ -17,6 +17,9 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
 
+   // short movie filter checkbox
+   const [filterIsOn, setFilterIsOn] = useState(false);
+
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
@@ -33,8 +36,7 @@ function App() {
   const [query, setQuery]= useState('');
   //result after search word
   const [filteredMovies, setFilteredMovies] = useState([]);
-  // short movie filter checkbox
-  const [filterIsOn, setFilterIsOn] = React.useState(false);
+ 
   // search in short movie
   const [filteredShortMovies, setFilteredShortMovies] = React.useState(false);
 
@@ -61,15 +63,42 @@ function App() {
         setCurrentUser(userData);
         setSavedMovies(movies.Movies);
         localStorage.setItem('savedMovies', JSON.stringify(movies.Movies));
+        shortMoviesFilterCheck();
         setTimeout(() => setIsLoading(false), 1000);
     })} else {
-      setLoggedIn(false)
+      setLoggedIn(false);
     }
   }, [loggedIn]);
 
-  const tokenCheck = () => {
+  const onFilterClick = () => {
+    if(!filterIsOn){
+      setFilterIsOn(true);
+      localStorage.setItem('filterIsOn', 'true');
+    } else {
+      setFilterIsOn(false);
+      localStorage.removeItem('filterIsOn');
+    }
+  };
+
+  const shortMoviesFilterCheck = () => {
     const searchQuery = localStorage.getItem('searchQuery');
     const filterIsOn = localStorage.getItem('filterIsOn');
+    if(searchQuery) {
+      const searchQueryFromLocalStorage = JSON.parse(localStorage.getItem('searchQuery'));
+      setQuery(searchQueryFromLocalStorage);
+      searchHandler(query);
+      // chech short movies filter 
+      if(filterIsOn) {
+        debugger
+        setFilterIsOn(true);
+        setFilteredShortMovies(true);
+      }
+    }
+    // remove short movies filter
+    localStorage.removeItem('filterIsOn')
+  }
+
+  const tokenCheck = () => {
     if (localStorage.getItem('jwt')) {
       let jwt = localStorage.getItem('jwt');
       mainApi
@@ -77,22 +106,10 @@ function App() {
         .then((res) => {
           if (res) {
             switchToLoggedIn(res.email);
-            if(searchQuery) {
-              const searchQueryFromLocalStorage = JSON.parse(localStorage.getItem('searchQuery'))
-              setQuery(searchQueryFromLocalStorage)
-              searchHandler(query)
-              // chech short movies filter 
-              if(filterIsOn) {
-                setFilteredShortMovies(true)
-              }
-            }
           }
-          // remove short movies filter
-          localStorage.removeItem('filterIsOn')
         })
-    }
+    }  
   }
-
     const switchToLoggedIn = (name, email) => {
       setLoggedIn(true);
       setUserEmail(email);
@@ -116,16 +133,16 @@ function App() {
     };
 
     // Setting up token operation
-    const handleRegister = (email, password, name) => {
-      return mainApi
-        .register(email, password, name)
-        .then(() => {
-          isLoading(true);
-          navigate("/signin")
-          })
-          .catch(() => {
-            isLoading(false);
-          })
+  const handleRegister = (email, password, name) => {
+    return mainApi
+      .register(email, password, name)
+      .then(() => {
+        isLoading(true);
+        navigate("/signin")
+      })
+      .catch(() => {
+          isLoading(false);
+      })
     };
 
   const handleUpdateUser = ({ name, email }) => {
@@ -146,6 +163,7 @@ function App() {
     setLoggedIn(false);
     localStorage.removeItem('allMovies');
     localStorage.removeItem('savedMovies');
+    localStorage.removeItem('filterIsOn');
     setAllMovies([]);
     setSavedMovies([]);
     setFilteredMovies([]);
@@ -296,6 +314,8 @@ function App() {
                     loggedIn={loggedIn}
                     email={userEmail}/>
                   <Movies
+                  onFilterClick={onFilterClick}
+                  filterIsOn={filterIsOn}
                   userEmail={userEmail}
                   loggedIn={loggedIn}
                   movies={filteredMovies}
