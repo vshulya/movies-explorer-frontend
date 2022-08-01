@@ -86,13 +86,25 @@
   border-bottom: 1px solid #424242;
 }
 
-.auth__error {
+.auth__validation-error {
   padding-top: 6px;
   margin: 0;
   font-size: 10px;
   line-height: 12px;
   color: #EE3465;
 }
+
+.auth__error {
+  padding-bottom: 16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-align: center;
+  margin: 0;
+  color: #EE3465;
+}
+
 
 .auth__button {
   border: none;
@@ -102,6 +114,10 @@
   background: #4285F4;
   border-radius: 3px;
   color: #FFFFFF;
+}
+
+.auth__button_disabled {
+  opacity: .4;
 }
 
 .auth__button-wrapper {

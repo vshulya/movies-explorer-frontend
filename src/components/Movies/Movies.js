@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import './Movies.css';
 
-function Movies({filterIsOn, onFilterClick, isNoResult, movies, savedMovies, onMovieSave, onMovieDelete, isMovieSaved, isLoading, onSubmitSearch }) {
+function Movies({onFilterClick, filterIsOn, isNoResult, movies, savedMovies, onMovieSave, onMovieDelete, isMovieSaved, isLoading, onSubmitSearch }) {
 
   //const [filterIsOn, setFilterIsOn] = useState(false);
 
@@ -34,8 +34,7 @@ function Movies({filterIsOn, onFilterClick, isNoResult, movies, savedMovies, onM
     <>
       <SearchForm 
         onFilterClick={onFilterClick} 
-        onSearch={onSubmitSearch}
-        filterIsOn={filterIsOn}/>
+        onSearch={onSubmitSearch}/>
       {isLoading &&<Preloader/>}
       {!isLoading && isNoResult === ''
       && (

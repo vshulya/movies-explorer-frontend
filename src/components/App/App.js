@@ -31,6 +31,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isNoResult, setIsNoResult] = useState(false);
   const [isLoadingError, setIsLoadingError] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [registrationError, setRegistrationError] = useState('');
+  const [isSuccess, setIsSuccess] = useState(true);
+  const [profileMessage, setProfileMessage] = useState('');
 
   //search word
   const [query, setQuery]= useState('');
@@ -71,13 +75,8 @@ function App() {
   }, [loggedIn]);
 
   const onFilterClick = () => {
-    if(!filterIsOn){
-      setFilterIsOn(true);
-      localStorage.setItem('filterIsOn', 'true');
-    } else {
-      setFilterIsOn(false);
-      localStorage.removeItem('filterIsOn');
-    }
+    localStorage.setItem('filterIsOn', 'true');
+    setFilterIsOn(prev => !prev);
   };
 
   const shortMoviesFilterCheck = () => {
@@ -89,7 +88,6 @@ function App() {
       searchHandler(query);
       // chech short movies filter 
       if(filterIsOn) {
-        debugger
         setFilterIsOn(true);
         setFilteredShortMovies(true);
       }
@@ -118,10 +116,13 @@ function App() {
       return loggedIn
     };
 
-    const handleLogin = (email, password) => {
+    const handleLogin = ({email, password}) => {
+      setIsLoading(true);
+      setLoginError('');
       return mainApi
         .authorize(email, password)
         .then((data) => {
+          setLoginError('');
           if (!data.token) {
             return
           } else {localStorage.setItem('jwt', data.token);
@@ -129,29 +130,43 @@ function App() {
             }
         })
         .catch(() => {
+          setIsLoading(false);
+          setLoginError('Неверные email или пароль');
         })
     };
 
     // Setting up token operation
-  const handleRegister = (email, password, name) => {
+  const handleRegister = ({email, password, name}) => {
+    setRegistrationError('');
+    setIsLoading(true);
     return mainApi
       .register(email, password, name)
-      .then(() => {
-        isLoading(true);
-        navigate("/signin")
+      .then((res) => {
+        setRegistrationError('');
+        setCurrentUser(res);
+        setIsLoading(false);
+        setTimeout(() => handleLogin(email, password), 1000);
       })
       .catch(() => {
-          isLoading(false);
+        setIsLoading(false);
+        setRegistrationError('Что-то пошло не так...');
       })
-    };
+  };
 
   const handleUpdateUser = ({ name, email }) => {
+    setProfileMessage('');
     mainApi
       .editProfile(name, email)
       .then((res) => {
         setCurrentUser(res);
+        setProfileMessage('Профиль успешно обновлен!');
+        setIsSuccess(true);
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        setIsSuccess(false);
+        setProfileMessage('Что-то пошло не так...');
+      });
   }
 
   const handleSignOut = () => {
@@ -362,6 +377,9 @@ function App() {
                     loggedIn={loggedIn}
                     email={userEmail}/>
                   <Profile 
+                    profileMessage={profileMessage}
+                    isSuccess={isSuccess}
+                    isLoading={isLoading}
                     userEmail={userEmail}
                     loggedIn={loggedIn}
                     onUpdateUser={handleUpdateUser}
@@ -375,7 +393,9 @@ function App() {
             element={
               <>
                 <Register 
-                handleRegister={handleRegister}/>
+                handleRegister={handleRegister}
+                isLoading={isLoading}
+                registrationError={registrationError}/>
               </>
             }>
           </Route>
@@ -384,7 +404,8 @@ function App() {
             element={
               <>
                 <Login 
-                  handleLogin={handleLogin}/>
+                  handleLogin={handleLogin}
+                  loginError={loginError}/>
               </>
             }>
           </Route>

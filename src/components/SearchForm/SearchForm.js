@@ -4,7 +4,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import search_icon from '../../images/search_icon.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({onFilterClick, filterIsOn, onSearch, isLoading}) {
+function SearchForm({onFilterClick, onSearch, isLoading}) {
 
   const [query, setQuery]= useState('');
 
@@ -50,8 +50,7 @@ function SearchForm({onFilterClick, filterIsOn, onSearch, isLoading}) {
         </button>
       </form>    
       <FilterCheckbox 
-        onFilterClick={onFilterClick} 
-        filterIsOn={filterIsOn}/>
+        onFilterClick={onFilterClick} />
     </div>
   );
 }
