@@ -1,12 +1,12 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './Navigation.css';
 import Logo from '../Logo/Logo';
 import { Link } from "react-router-dom";
 import HamburgerMenuModal from '../HamburgerMenuModal/HamburgerMenuModal'
 
-function Navigation({userEmail}) {
+function Navigation({accauntEmail}) {
 
-  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = React.useState(false);
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
 
   const openHamburgerMenu = () => {
     setIsHamburgerMenuOpen(true);
@@ -17,7 +17,7 @@ function Navigation({userEmail}) {
   }
 
   //close by esc
-  React.useEffect(() => {
+  useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
         closeHamburgerMenu();
@@ -28,7 +28,7 @@ function Navigation({userEmail}) {
   }, [])
 
   //close by click on layover
-  React.useEffect(() => {
+  useEffect(() => {
     const closeByClick = (e) => {
       if (e.target.classList.contains('hamburgerMenu')) {
         closeHamburgerMenu();
@@ -49,14 +49,15 @@ function Navigation({userEmail}) {
                   isOpen={isHamburgerMenuOpen}
                   onClick={openHamburgerMenu}
                   onClose={closeHamburgerMenu}
+                  accauntEmail={accauntEmail}
                 />
             </div>
             <nav className="nav__menu"> 
-              <Link className="nav__link nav__link_active link" to="/movies">Фильмы</Link>
+              <Link className="nav__link link" to="/movies">Фильмы</Link>
               <Link className="nav__link link" to="/saved-movies">Сохранённые фильмы</Link>
             </nav>
             </div>
-            <Link  className="nav__profile-link link" to="/profile">{userEmail}</Link>
+            <Link  className="nav__profile-link link" to="/profile">Аккаунт</Link>
       </div>
     </>
   );

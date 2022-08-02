@@ -7,9 +7,7 @@ function FilterCheckbox({onFilterClick}) {
       <label className="filterCheckbox__checkbox">
         <input 
           type="checkbox" 
-          onChange={onFilterClick} />
-          {/* value={filterIsOn} */}
-          {/* defaultChecked={filterIsOn} */}
+          onChange = {(e) => onFilterClick(e.target.checked)} />
         <span className="filterCheckbox__switch"></span>
       </label>
       <p className="filterCheckbox__caption">Короткометражки</p>

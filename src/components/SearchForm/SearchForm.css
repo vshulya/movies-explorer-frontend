@@ -37,8 +37,12 @@
 
 /* TODO edit style  */
 .searchForm__error {
-  font-size: 13px;
-  line-height: 17px;
+  margin: 0;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  display: flex;
+  justify-content: center;
 }
 
 .searchForm__button {

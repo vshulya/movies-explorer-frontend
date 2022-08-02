@@ -4,9 +4,10 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoading, isNoResult}) {
+function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoading, isNoResult, noResultMessage, searchFilter}) {
 
   const [allSavedMovies, setAllSavedMovies] = useState([]);
+  const [query, setQuery] = useState('')
   // filter short movies
   const [filterIsOn, setFilterIsOn] = useState(false);
   // search in saved movies
@@ -23,14 +24,6 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
     setFilterIsOn(!filterIsOn);
   };
 
-  const searchFilter = (data, searchQuery) => {
-    if (searchQuery) {
-      const regex = new RegExp(searchQuery, 'gi');
-      return data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
-    }
-    return [];
-  };
-
   const searchHandler = (searchQuery) => {
     setFilteredSavedMovies(searchFilter(movies, searchQuery));
   };
@@ -39,7 +32,9 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
     <>
       <SearchForm 
         onFilterClick={onFilterClick}
-        onSearch={searchHandler}/>
+        onSearch={searchHandler}
+        query={query}
+        setQuery={setQuery}/>
       {isLoading && <Preloader/>}
       {!isLoading && !isNoResult
       && (
@@ -50,7 +45,7 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
         isMovieSaved={isMovieSaved} />)}
       {!isLoading
         && isNoResult
-        && <div className="movies__error">{isNoResult}</div>
+        && <div className="movies__error">{noResultMessage}</div>
       }
   </>
   );

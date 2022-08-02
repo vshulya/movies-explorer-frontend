@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
-import useFormWithValidation from "../../hooks/useFormWithValidation";
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 function Profile({onUpdateUser, onLogOut, isLoading, isSuccess, profileMessage}) {
 

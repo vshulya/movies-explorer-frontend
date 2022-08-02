@@ -57,12 +57,13 @@
   text-decoration: none;
   font-size: 13px;
   line-height: 18px;
+  font-weight: 400;
   /* identical to box height, or 138% */
   text-align: right;
   color: #FFFFFF;
 }
 
-.nav__link_active {
+.nav__link:focus {
   font-weight: 500;
 }
 

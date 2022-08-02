@@ -5,11 +5,11 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 
 
-function Header({loggedIn, userEmail}) {
+function Header({loggedIn, accauntEmail}) {
 
   return (
     <>
-      {(loggedIn) ? (<Navigation userEmail={userEmail}/>) : (
+      {(loggedIn) ? (<Navigation accauntEmail={accauntEmail}/>) : (
         <>
           <header className="header">
             <Logo />

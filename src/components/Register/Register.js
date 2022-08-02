@@ -10,7 +10,6 @@ const Register = ({handleRegister, isLoading, registrationError}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    debugger
     handleRegister(values);
   }
 

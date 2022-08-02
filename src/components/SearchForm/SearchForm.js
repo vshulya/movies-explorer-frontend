@@ -1,41 +1,38 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './SearchForm.css';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 import search_icon from '../../images/search_icon.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({onFilterClick, onSearch, isLoading}) {
-
-  const [query, setQuery]= useState('');
+function SearchForm({onFilterClick, onSearch, query, setQuery}) {
 
   //const formWithValidation = useFormWithValidation();
-  //const { searchText } = formWithValidation.values;
-  //const { handleChange, resetForm } = formWithValidation;
-  const [error, setError] = React.useState('');
+  //const { query } = formWithValidation.values;
+  const { resetForm } = useFormWithValidation();
+  const [error, setError] = useState('');
 
-  // React.useEffect(() => {
-  //   resetForm();
-  // }, [resetForm]);
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!query) {
-      setError('Нужно ввести ключевое слово');
-      setTimeout(() => {
+      if (!query) {
+        setError('Нужно ввести ключевое слово');
+        setTimeout(() => {
         setError('');
-      }, 2000);
-    } else {
-      onSearch(query);
-      //resetForm();
+      }, 3000);
+      } else {
+        onSearch(query);
+        resetForm();
     }
   };
 
   return (
     <div className="searchForm">
-      <form className="searchForm__form" onSubmit={handleSubmit}>
+      <form className="searchForm__form" onSubmit={handleSubmit} noValidate>
         <input className="searchForm__input"
           name="search-form"
-          id="search-form" 
           placeholder="Фильм" 
           value={query || ''}
           type="search"
@@ -45,10 +42,10 @@ function SearchForm({onFilterClick, onSearch, isLoading}) {
         <button className="searchForm__button button" 
           type="submit"
           onSubmit={handleSubmit}>
-          {error && <span className="searchForm_error">{error}</span>}
             <img src={search_icon} alt="значок поиска" className="searchForm__search"/>
         </button>
-      </form>    
+      </form> 
+      {error && <span className="searchForm__error">{error}</span>}   
       <FilterCheckbox 
         onFilterClick={onFilterClick} />
     </div>
