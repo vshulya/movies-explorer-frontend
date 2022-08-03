@@ -52,18 +52,18 @@ function App() {
     tokenCheck();
   }, []);
 
-  function rememberOldSearchSettingsFromLocalStorage() {
-    const lsQuery = localStorage.getItem("searchQuery");
-    const lsFilterIsOn = localStorage.getItem("filterIsOn");
-    const lsFilteredMovies = localStorage.getItem("filteredMovies");
-    if(lsQuery) setQuery(lsQuery);
-    if(lsFilterIsOn) setFilterIsOn(lsFilterIsOn);
-    if(lsFilteredMovies) setAllMovies(lsFilteredMovies);
-  };
+  // function rememberOldSearchSettingsFromLocalStorage() {
+  //   const lsQuery = localStorage.getItem("searchQuery");
+  //   const lsFilterIsOn = localStorage.getItem("filterIsOn");
+  //   const lsFilteredMovies = localStorage.getItem("filteredMovies");
+  //   if(lsQuery) setQuery(lsQuery);
+  //   if(lsFilterIsOn) setFilterIsOn(lsFilterIsOn);
+  //   if(lsFilteredMovies) setAllMovies(lsFilteredMovies);
+  // };
 
   useEffect(() => {
     if (loggedIn) {
-      rememberOldSearchSettingsFromLocalStorage();
+      //rememberOldSearchSettingsFromLocalStorage();
       setIsLoading(true)
       Promise.all([
         mainApi.getProfile(localStorage.getItem('jwt')),
@@ -301,9 +301,9 @@ function App() {
         .catch(err => console.log(err))
   }; 
 
-  const onFilterClick = (e) => {
+  const onFilterClick = () => {
     localStorage.setItem('filterIsOn', 'true');
-    setFilterIsOn(prev => !prev);
+    setFilterIsOn(!filterIsOn);
   };
 
   

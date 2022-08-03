@@ -4,7 +4,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import search_icon from '../../images/search_icon.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({onFilterClick, onSearch, query, setQuery}) {
+function SearchForm({onFilterClick, onSearch, query, setQuery, filterIsOn}) {
 
   //const formWithValidation = useFormWithValidation();
   //const { query } = formWithValidation.values;
@@ -47,7 +47,8 @@ function SearchForm({onFilterClick, onSearch, query, setQuery}) {
       </form> 
       {error && <span className="searchForm__error">{error}</span>}   
       <FilterCheckbox 
-        onFilterClick={onFilterClick} />
+        onFilterClick={onFilterClick}
+        filterIsOn={filterIsOn} />
     </div>
   );
 }
