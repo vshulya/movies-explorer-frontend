@@ -123,7 +123,6 @@ class MainApi {
     baseUrl: 'https://api.my-movies-explorer.nomoredomains.xyz',
     headers() { 
       return  {
-        "origin": "localhost:3000",
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
