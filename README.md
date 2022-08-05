@@ -6,6 +6,7 @@
 
 Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете. \
 Ссылка на проект https://moviesexplorer.nomoredomains.sbs/
+Ссылка на пуллреквест https://github.com/vshulya/movies-explorer-frontend/pull/2
 
 Backend: [Express JS](https://github.com/vshulya/movies-explorer-api/) \
 
