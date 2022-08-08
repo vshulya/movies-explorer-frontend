@@ -6,20 +6,7 @@ import useFormWithValidation from "../../hooks/useFormWithValidation";
 
 const Login = ({handleLogin, loginError}) => {
 
-  const {values, handleChange, errors, isValid, setValues, setIsValid} = useFormWithValidation();
-
-  // const [inputs, setInputs] = React.useState({
-  //   email: '',
-  //   password: ''
-  // })
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInputs((prev) => ({
-  //     ...prev,
-  //     [name]: value,
-  //   }));
-  // };
+  const {values, handleChange, errors, isValid} = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,11 +14,9 @@ const Login = ({handleLogin, loginError}) => {
   } 
 
   return (
-
     <AuthForm
       title="Рады видеть!"
       onSubmit={handleSubmit}>
-
       <fieldset className='auth__fieldset'>
         <label className="auth__field">
           <p className='auth__input-name'>Email</p>
@@ -39,6 +24,7 @@ const Login = ({handleLogin, loginError}) => {
             type="email"
             value={values.email || ''}
             onChange={handleChange}
+            pattern="^\S+@\S+\.\S+$"
             name="email"
             className="auth__input"
             required />

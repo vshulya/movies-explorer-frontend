@@ -61,6 +61,7 @@ function Profile({onUpdateUser, onLogOut, isLoading, isSuccess, profileMessage})
                 type="text"
                 value={values.name || ''}
                 onChange={handleChange}
+                pattern="[а-яА-Яa-zA-ZёË\- ]{1,}"
                 placeholder="Имя"
                 name="name"
                 className="profile__input"
@@ -75,6 +76,7 @@ function Profile({onUpdateUser, onLogOut, isLoading, isSuccess, profileMessage})
                 type="email"
                 value={values.email || ''}
                 onChange={handleChange}
+                pattern="^\S+@\S+\.\S+$"
                 placeholder="Email"
                 name="email"
                 className="profile__input"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import './App.css';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
@@ -41,29 +41,28 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   const navigate = useNavigate();
+  const path = useLocation().pathname;
 
   const isMovieSaved = (movie) => savedMovies.some(sm => {
     return sm.id === movie.id
   });
-
 
   //chech token when mount the app
   useEffect(() => {
     tokenCheck();
   }, []);
 
-  // function rememberOldSearchSettingsFromLocalStorage() {
-  //   const lsQuery = localStorage.getItem("searchQuery");
-  //   const lsFilterIsOn = localStorage.getItem("filterIsOn");
-  //   const lsFilteredMovies = localStorage.getItem("filteredMovies");
-  //   if(lsQuery) setQuery(lsQuery);
-  //   if(lsFilterIsOn) setFilterIsOn(lsFilterIsOn);
-  //   if(lsFilteredMovies) setAllMovies(lsFilteredMovies);
-  // };
+  function rememberOldSearchSettingsFromLocalStorage() {
+    const lsQuery = localStorage.getItem("searchQuery");
+    const lsFilterIsOn = localStorage.getItem("filterIsOn") === 'true';
+    const lsFilteredMovies = JSON.parse(localStorage.getItem("filteredMovies"));
+    if(lsQuery) setQuery(lsQuery);
+    if(lsFilterIsOn) setFilterIsOn(lsFilterIsOn);
+    if(lsFilteredMovies) setFilteredMovies(lsFilteredMovies);
+  };
 
   useEffect(() => {
     if (loggedIn) {
-      //rememberOldSearchSettingsFromLocalStorage();
       setIsLoading(true)
       Promise.all([
         mainApi.getProfile(localStorage.getItem('jwt')),
@@ -73,7 +72,8 @@ function App() {
         getAllMovies();
         setCurrentUser(userData);
         setSavedMovies(movies.Movies);
-        localStorage.setItem('savedMovies', JSON.stringify(movies.Movies));
+        //localStorage.setItem('savedMovies', JSON.stringify(movies.Movies));
+        rememberOldSearchSettingsFromLocalStorage();
         setTimeout(() => setIsLoading(false), 1000);
     })} else {
       setLoggedIn(false);
@@ -96,7 +96,7 @@ function App() {
       setLoggedIn(true);
       setUserEmail(email);
       setUserName(name);
-      navigate("/movies");
+      navigate(path);
       return loggedIn;
     };
 
@@ -111,6 +111,7 @@ function App() {
             return
           } else {localStorage.setItem('jwt', data.token);
           switchToLoggedIn(email);
+          navigate('/movies');
             }
         })
         .catch(() => {
@@ -160,21 +161,18 @@ function App() {
   }
 
   const handleSignOut = () => {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('currentUser');
     setCurrentUser({});
     setUserName('');
     setUserEmail('');
     setQuery('');
     setLoggedIn(false);
-    localStorage.removeItem('allMovies');
-    localStorage.removeItem('searchQuery');
-    localStorage.removeItem('filteredMovies');
-    localStorage.removeItem('filterIsOn');
-    localStorage.removeItem('savedMovies');
     setAllMovies([]);
     setSavedMovies([]);
     setFilteredMovies([]);
+    localStorage.clear();
+    setTimeout(() => {
+      navigate('/');
+    }, 100);
   };
   
   //grab all movies from MovieApi
@@ -187,18 +185,6 @@ function App() {
     })
     .catch(err => console.log(err));
   };
-
-  // //grab saved movies from MainApi
-  // const fetchSavedMovies = () => {
-  //   mainApi
-  //   .getSavedMovies()
-  //   .then((movies) => {
-  //     debugger;
-  //     setSavedMovies(movies.Movies);
-  //     localStorage.setItem('savedMovies', JSON.stringify(movies.Movies))
-  //   })
-  //   .catch((err) => console.log(err))
-  // };
 
   const getAllMovies = () => {
     //check if a movie in localStorage
@@ -220,26 +206,6 @@ function App() {
     }
   };
 
-  // const getSavedMovies = () => {
-  //   //check if a movie in localStorage
-  //   const localSavedMovies = localStorage.getItem('savedMovies');
-  //   if(localSavedMovies){
-  //     try {
-  //       const parsedMovies = (JSON.parse(localSavedMovies))
-  //       setSavedMovies(parsedMovies)
-  //     //if there is an error we clean localStorage and take movies from API
-  //     } catch(err) {
-  //       localStorage.removeItem('savedMovies');
-  //       setIsLoadingError('Во время запроса произошла ошибка. '
-  //       + 'Возможно, проблема с соединением или сервер недоступен. '
-  //       + 'Подождите немного и попробуйте ещё раз');
-  //       fetchSavedMovies();
-  //     }
-  //   } else {
-  //     fetchSavedMovies();
-  //   }
-  // };
-
   const searchFilter = (data, searchQuery) => {
     if (searchQuery) {
       const regex = new RegExp(searchQuery, 'gi');
@@ -259,21 +225,11 @@ function App() {
   const searchHandler = (searchQuery) => {
       //setIsLoading(true);
       setQuery(searchQuery);
-
-
       //when we search, first save the last query params.
-      if(searchQuery) localStorage.setItem('searchQuery',  (searchQuery) );
-      localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-
-      if (!localStorage.getItem("allMovies")){
-        getAllMovies();
-        const filteredMovies = searchFilter(allMovies, searchQuery);
-        setFilteredMovies(filteredMovies);
-        //setIsLoading(false);
-      } else {
-        const filteredMoviesFromLocalStorage = searchFilter(JSON.parse(localStorage.getItem('allMovies')), searchQuery);
-        setFilteredMovies(filteredMoviesFromLocalStorage);
-      }     
+      if(searchQuery) localStorage.setItem('searchQuery', (searchQuery));
+        const lsFilteredMovies = searchFilter(JSON.parse(localStorage.getItem('allMovies')), searchQuery);
+        localStorage.setItem('filteredMovies', JSON.stringify(lsFilteredMovies));
+        setFilteredMovies(lsFilteredMovies);    
   };
 
   //saved movie
@@ -301,12 +257,10 @@ function App() {
         .catch(err => console.log(err))
   }; 
 
-  const onFilterClick = () => {
-    localStorage.setItem('filterIsOn', 'true');
-    setFilterIsOn(!filterIsOn);
+  const onFilterClick = (isOn) => {
+    localStorage.setItem('filterIsOn', isOn);
+    setFilterIsOn(isOn);
   };
-
-  
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -419,7 +373,7 @@ function App() {
             }>
           </Route>
           <Route 
-            exact path='*' 
+            exact path='*'
             element={
               <>
                 <NotFoundPage />

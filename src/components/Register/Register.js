@@ -43,6 +43,8 @@ const Register = ({handleRegister, isLoading, registrationError}) => {
             onChange={handleChange}
             name="email"
             className="auth__input"
+
+            pattern="^\S+@\S+\.\S+$"
             required />
             <span className='auth__validation-error'>{errors.email}</span>
         </label>

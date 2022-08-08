@@ -31,6 +31,7 @@ function MoviesCardList({movies, moviesInSaved, savedMovies, onMovieSave, onMovi
   const renderMovies = () => {
     const count = Math.min(movies.length, idx + extraRow);
     const extraMovies = movies.slice(idx, count);
+    debugger
     setRenderedMovies([...renderedMovies, ...extraMovies]);
     setIdx(count);
   };
@@ -64,7 +65,7 @@ function MoviesCardList({movies, moviesInSaved, savedMovies, onMovieSave, onMovi
     const minutes = time % 60;
     return hours > 0 ? `${hours}ч ${minutes}м` : `${minutes}м`
   }
-  const isInAllMovies = location.pathname === '/movies';
+  const isInAllMovies = location.pathname === '/movies' || location.pathname === '/movies/';
   return (
   <div className="movies">
     <ul className="movies__list">
