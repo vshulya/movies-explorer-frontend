@@ -42,6 +42,7 @@ function App() {
 
   const navigate = useNavigate();
   const path = useLocation().pathname;
+  const location = useLocation();
 
   const isMovieSaved = (movie) => savedMovies.some(sm => {
     
@@ -76,6 +77,9 @@ function App() {
         //localStorage.setItem('savedMovies', JSON.stringify(movies.Movies));
         rememberOldSearchSettingsFromLocalStorage();
         setTimeout(() => setIsLoading(false), 1000);
+        if(location.pathname ==='/signup' || location.pathname ==='/signin') {
+          navigate('/');
+        }
     })} else {
       setLoggedIn(false);
     }
