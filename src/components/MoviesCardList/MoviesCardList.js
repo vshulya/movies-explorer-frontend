@@ -72,30 +72,30 @@ function MoviesCardList({movies, moviesInSaved, savedMovies, onMovieSave, onMovi
           {isInAllMovies ? (
             renderedMovies.map((movie) => (
                 <MoviesCard
-                    key={movie.id}
-                    movie={movie} 
-                    image={`https://api.nomoreparties.co/${movie.image.url}`}
-                    nameRU = {movie.nameRU}
-                    duration = {calcDuration(movie.duration)}
-                    trailer = {movie.trailerLink}
-                    savedMovies={savedMovies}
-                    isMovieSaved={isMovieSaved}
-                    onMovieSave={onMovieSave}
-                    onMovieDelete={onMovieDelete}
-                    />
+                  key={movie.id}
+                  movie={movie} 
+                  image={`https://api.nomoreparties.co/${movie.image.url}`}
+                  nameRU = {movie.nameRU}
+                  duration = {calcDuration(movie.duration)}
+                  trailer = {movie.trailerLink}
+                  savedMovies={savedMovies}
+                  isMovieSaved={isMovieSaved}
+                  onMovieSave={onMovieSave}
+                  onMovieDelete={onMovieDelete}
+                />
             ))
           ) : (moviesInSaved.map((movie) => (
                 <MoviesCard
-                    key={movie._id}
-                    movie={movie} 
-                    image={movie.image}
-                    nameRU = {movie.nameRU}
-                    duration = {calcDuration(movie.duration)}
-                    trailer = {movie.trailerLink}
-                    savedMovies={savedMovies}
-                    isMovieSaved={isMovieSaved}
-                    onMovieDelete={onMovieDelete}
-                    />)
+                  key={movie._id}
+                  movie={movie} 
+                  image={movie.image}
+                  nameRU = {movie.nameRU}
+                  duration = {calcDuration(movie.duration)}
+                  trailer = {movie.trailerLink}
+                  savedMovies={savedMovies}
+                  isMovieSaved={isMovieSaved}
+                  onMovieDelete={onMovieDelete}
+                />)
             ))
           }
     </ul>

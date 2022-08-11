@@ -44,7 +44,8 @@ function App() {
   const path = useLocation().pathname;
 
   const isMovieSaved = (movie) => savedMovies.some(sm => {
-    return sm.id === movie.id
+    
+    return sm.id === movie.id || sm.movieId === movie.id;
   });
 
   //chech token when mount the app
@@ -243,10 +244,10 @@ function App() {
       })
       .catch(err => console.log(err));
   };
- 
+
   //delete movies
   const  handleMovieDelete = (movie) => {
-    const movieId = savedMovies.find((item) => item.id === movie.id)._id;
+    const movieId = savedMovies.find((item) => item.id === movie.id || item.movieId === movie.id)._id;
       mainApi
         .deleteMovie(movieId)
         .then(() => {
@@ -255,7 +256,21 @@ function App() {
           localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
         })
         .catch(err => console.log(err))
-  }; 
+  };  
+
+    // //delete saved movies
+    // const  handleSavedMovieDelete = (movie) => {
+    //   debugger
+    //   const movieId = savedMovies.find((item) => item.id === movie.id)._id;
+    //     mainApi
+    //       .deleteMovie(movieId)
+    //       .then(() => {
+    //         const updatedSavedMovies = savedMovies.filter(m => m._id !== movieId)
+    //         setSavedMovies(updatedSavedMovies);
+    //         localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
+    //       })
+    //       .catch(err => console.log(err))
+    // };
 
   const onFilterClick = (isOn) => {
     localStorage.setItem('filterIsOn', isOn);
@@ -287,21 +302,21 @@ function App() {
                     loggedIn={loggedIn}
                     accauntEmail={userEmail}/>
                   <Movies
-                  onFilterClick={onFilterClick}
-                  filterIsOn={filterIsOn}
-                  userEmail={userEmail}
-                  loggedIn={loggedIn}
-                  movies={filteredMovies}
-                  savedMovies={false}
-                  onMovieSave={handleMovieSave}
-                  onMovieDelete={handleMovieDelete}
-                  isMovieSaved={isMovieSaved} 
-                  onSubmitSearch={searchHandler}
-                  isLoading={isLoading}
-                  isNoResult={isNoResult}
-                  noResultMessage={noResultMessage}
-                  query={query}
-                  setQuery={setQuery}/>
+                    onFilterClick={onFilterClick}
+                    filterIsOn={filterIsOn}
+                    userEmail={userEmail}
+                    loggedIn={loggedIn}
+                    movies={filteredMovies}
+                    savedMovies={false}
+                    onMovieSave={handleMovieSave}
+                    onMovieDelete={handleMovieDelete}
+                    isMovieSaved={isMovieSaved} 
+                    onSubmitSearch={searchHandler}
+                    isLoading={isLoading}
+                    isNoResult={isNoResult}
+                    noResultMessage={noResultMessage}
+                    query={query}
+                    setQuery={setQuery}/>
                   <Footer/>
                 </>
               </ProtectedRoute>
@@ -316,16 +331,16 @@ function App() {
                     loggedIn={loggedIn}
                     accauntEmail={userEmail}/>
                   <SavedMovies 
-                  searchFilter={searchFilter}
-                  userEmail={userEmail}
-                  loggedIn={loggedIn}
-                  savedMovies
-                  movies={savedMovies}
-                  onMovieDelete={handleMovieDelete}
-                  isMovieSaved={isMovieSaved} 
-                  isLoading={isLoading}
-                  isNoResult={isNoResult}
-                  noResultMessage={noResultMessage}/>
+                    searchFilter={searchFilter}
+                    userEmail={userEmail}
+                    loggedIn={loggedIn}
+                    savedMovies
+                    movies={savedMovies}
+                    onMovieDelete={handleMovieDelete}
+                    isMovieSaved={isMovieSaved} 
+                    isLoading={isLoading}
+                    isNoResult={isNoResult}
+                    noResultMessage={noResultMessage}/>
                   <Footer/>
                 </>
               </ProtectedRoute>

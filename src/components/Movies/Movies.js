@@ -25,7 +25,8 @@ function Movies({onFilterClick, filterIsOn, isNoResult, noResultMessage, movies,
         movies={filterIsOn ? filterShortFilm(movies) : movies}
         onMovieSave={onMovieSave}
         onMovieDelete={onMovieDelete}
-        isMovieSaved={isMovieSaved}/>)}
+        isMovieSaved={isMovieSaved}
+        />)}
       {
         !isLoading
         && isNoResult

@@ -39,10 +39,12 @@ function SavedMovies({savedMovies, movies, onMovieDelete, isMovieSaved, isLoadin
       {!isLoading && !isNoResult
       && (
       <MoviesCardList 
+        movies = {movies}
         savedMovies={savedMovies}
         moviesInSaved={filterIsOn ? filterShortFilm(filteredSavedMovies) : filteredSavedMovies}
         onMovieDelete={onMovieDelete}
-        isMovieSaved={isMovieSaved} />)}
+        isMovieSaved={isMovieSaved} 
+        />)}
       {!isLoading
         && isNoResult
         && <div className="movies__error">{noResultMessage}</div>

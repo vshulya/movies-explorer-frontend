@@ -4,13 +4,13 @@ import MoviesCardButtonDelete from '../MoviesCardButtonDelete/MoviesCardButtonDe
 
 import './MoviesCard.css';
 
-function MoviesCard({ movie, savedMovies, image, nameRU, trailer, duration, onMovieDelete, onMovieSave, isMovieSaved}) {
-
+function MoviesCard({movie, savedMovies, image, nameRU, trailer, duration, onMovieDelete, onMovieSave, isMovieSaved}) {
+  
+  
   const isSaved = isMovieSaved(movie);
 
   const handleSaveMovieClick = (e) => {
     e.preventDefault();
-    console.log('меня нажали handleSaveMovieClick')
     onMovieSave(movie);
   };
 
