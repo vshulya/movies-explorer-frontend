@@ -1,49 +1,54 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './SearchForm.css';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 import search_icon from '../../images/search_icon.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({saved, onSearch, onSearchMovies, onSearchSavedMovies, onShortMoviesCheck, isChecked}) {
-  const [search, setSearch] = React.useState('');
+function SearchForm({onFilterClick, onSearch, query, setQuery, filterIsOn}) {
 
-  function handleSearchChange (e) {
-    setSearch(e.target.value);
-    onSearch(e.target.value);
-    handleValue(e);
-  }
-  function handleValue(e){
-    onSearch(e.target.value);
-  }
+  //const formWithValidation = useFormWithValidation();
+  //const { query } = formWithValidation.values;
+  const { resetForm } = useFormWithValidation();
+  const [error, setError] = useState('');
 
-  function handleSearchMovies(e) {
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onSearchMovies(search);
-  }
-
-  function handleSearchSavedMovies(e) {
-    e.preventDefault();
-    onSearchSavedMovies(search);
-  }
+      if (!query) {
+        setError('Нужно ввести ключевое слово');
+        setTimeout(() => {
+        setError('');
+      }, 3000);
+      } else {
+        onSearch(query);
+        resetForm();
+    }
+  };
 
   return (
     <div className="searchForm">
-      <form className="searchForm__form" onSubmit={saved ? handleSearchSavedMovies : handleSearchMovies}>
+      <form className="searchForm__form" onSubmit={handleSubmit} noValidate>
         <input className="searchForm__input"
-        type="search"
-        name="search-form"
-        id="search-form" 
-        placeholder="Фильм" 
-        value={search || ''} 
-        onChange={handleSearchChange}
-        required />
+          name="search-form"
+          placeholder="Фильм" 
+          value={query || ''}
+          type="search"
+          onChange={(e) => setQuery(e.target.value)}
+          autoComplete="off"
+          required />
         <button className="searchForm__button button" 
-        type="submit">
+          type="submit"
+          onSubmit={handleSubmit}>
             <img src={search_icon} alt="значок поиска" className="searchForm__search"/>
         </button>
-      </form>    
+      </form> 
+      {error && <span className="searchForm__error">{error}</span>}   
       <FilterCheckbox 
-      onChange={onShortMoviesCheck} 
-      isChecked={isChecked}/>
+        onFilterClick={onFilterClick}
+        filterIsOn={filterIsOn} />
     </div>
   );
 }

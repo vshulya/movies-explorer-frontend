@@ -1,0 +1,17 @@
+.movie__save-button {
+  max-width: 16px;
+  width: 100%;
+  height: 25px;
+  margin: 0;
+  background: url(../../images/save.svg);
+  object-fit: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.movie__save-button_saved {
+  background: url(../../images/saved.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}

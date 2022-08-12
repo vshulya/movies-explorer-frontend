@@ -83,6 +83,11 @@
   position: absolute;
   right: 23px;
   top: 23px;
+  transition: .3s;
+}
+
+.hamburger__close-button:hover {
+  opacity: 0.8;
 }
 
 .hamburger__link {
@@ -95,7 +100,11 @@
   text-decoration: none;
 }
 
-.hamburger__link_active {
+.hamburger__link:hover {
+  opacity: 0.8;
+}
+
+.hamburger__link:focus {
   text-decoration: underline;
 }
 
@@ -115,6 +124,10 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 90px;
+}
+
+.hamburger__login-button:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 540px) {

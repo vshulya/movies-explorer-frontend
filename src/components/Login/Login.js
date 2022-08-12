@@ -2,41 +2,55 @@ import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import './Login.css';
 import { Link } from "react-router-dom";
+import useFormWithValidation from "../../hooks/useFormWithValidation";
 
-const Login = (props) => {
+const Login = ({handleLogin, loginError}) => {
+
+  const {values, handleChange, errors, isValid} = useFormWithValidation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(values)
+  } 
+
   return (
     <AuthForm
       title="Рады видеть!"
-    > 
+      onSubmit={handleSubmit}>
       <fieldset className='auth__fieldset'>
         <label className="auth__field">
           <p className='auth__input-name'>Email</p>
           <input
             type="email"
-            defaultValue={'test@test.com'}
-            //onChange={handleChange}
-            id="email-input"
+            value={values.email || ''}
+            onChange={handleChange}
+            pattern="^\S+@\S+\.\S+$"
             name="email"
-            className="auth__input auth__input_type_email"
+            className="auth__input"
             required />
-            <span className='auth__error'></span>
+            <span className='auth__validation-error'>{errors.email}</span>
         </label>
         <label className="auth__field">
           <p className='auth__input-name'>Пароль</p>
           <input
             type="password"
-            defaultValue={''}
-            //onChange={handleChange}
-            id="password-input"
+            value={values.password || ''}
+            onChange={handleChange}
             name="password"
-            className="auth__input auth__input_type_password"
+            className="auth__input"
             minLength="2"
             maxLength="200"
             required />
+            <span className='auth__validation-error'>{errors.password}</span>
         </label>
       </fieldset>
       <div className="auth__button-wrapper">
-        <button type="submit" className="auth__button button">Войти</button>
+        <span className="auth__error">{loginError}</span>
+        <button type="submit" 
+        className={`auth__button button 
+        ${isValid ? '': 'auth__button_disabled'}`} 
+        disabled={!isValid}>
+        Войти</button>
         <p className="auth__hint">Ещё не зарегистрированы?{" "}
           <Link className="auth__link link" to="/signup">Регистрация</Link>
         </p>

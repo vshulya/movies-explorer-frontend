@@ -1,22 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Navigation from "../Navigation/Navigation";
-import Footer from "../Footer/Footer";
 import Preloader from '../Preloader/Preloader';
+import './Movies.css';
 
+function Movies({onFilterClick, filterIsOn, isNoResult, noResultMessage, movies, savedMovies, onMovieSave, 
+  onMovieDelete, isMovieSaved, isLoading, onSubmitSearch, query, setQuery}) {
 
-
-function Movies({movies, isLoading}) {
+  const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration <= 40);
 
   return (
     <>
-      <Navigation/>
-      <SearchForm />
-      {isLoading && <Preloader />}
+      <SearchForm 
+        onFilterClick={onFilterClick} 
+        filterIsOn={filterIsOn}
+        onSearch={onSubmitSearch} 
+        query={query} 
+        setQuery={setQuery}/>
+      {isLoading &&<Preloader/>}
+      {!isLoading && !isNoResult
+      && (
       <MoviesCardList 
-      movies={movies} />
-      <Footer/>
+        savedMovies={savedMovies}
+        movies={filterIsOn ? filterShortFilm(movies) : movies}
+        onMovieSave={onMovieSave}
+        onMovieDelete={onMovieDelete}
+        isMovieSaved={isMovieSaved}
+        />)}
+      {
+        !isLoading
+        && isNoResult
+        && <div className="movies__error">{noResultMessage}</div>
+      }
     </>
   )
 };
