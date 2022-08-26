@@ -31,7 +31,7 @@ const Login = ({handleLogin, loginError}) => {
             <span className='auth__validation-error'>{errors.email}</span>
         </label>
         <label className="auth__field">
-          <p className='auth__input-name'>Пароль</p>
+          <p className='auth__input-name'>Password</p>
           <input
             type="password"
             value={values.password || ''}
@@ -50,9 +50,9 @@ const Login = ({handleLogin, loginError}) => {
         className={`auth__button button 
         ${isValid ? '': 'auth__button_disabled'}`} 
         disabled={!isValid}>
-        Войти</button>
-        <p className="auth__hint">Ещё не зарегистрированы?{" "}
-          <Link className="auth__link link" to="/signup">Регистрация</Link>
+        Sign in</button>
+        <p className="auth__hint">Don't have an account?{" "}
+          <Link className="auth__link link" to="/signup">Sign up</Link>
         </p>
       </div>
     </AuthForm>

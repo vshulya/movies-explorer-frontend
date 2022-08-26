@@ -14,8 +14,8 @@ function Header({loggedIn, accauntEmail}) {
           <header className="header">
             <Logo />
             <nav className="header__menu">
-              <Link className="header__email link" to="/signup">Регистрация</Link>
-              <Link className="header__link link" to="/signin">Войти</Link>
+              <Link className="header__email link" to="/signup">Sign up</Link>
+              <Link className="header__link link" to="/signin">Sign in</Link>
             </nav>
           </header>
         </>)}

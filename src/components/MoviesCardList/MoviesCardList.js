@@ -75,7 +75,7 @@ function MoviesCardList({movies, moviesInSaved, savedMovies, onMovieSave, onMovi
                   key={movie.id}
                   movie={movie} 
                   image={`https://api.nomoreparties.co/${movie.image.url}`}
-                  nameRU = {movie.nameRU}
+                  nameEN = {movie.nameEN}
                   duration = {calcDuration(movie.duration)}
                   trailer = {movie.trailerLink}
                   savedMovies={savedMovies}
@@ -89,7 +89,7 @@ function MoviesCardList({movies, moviesInSaved, savedMovies, onMovieSave, onMovi
                   key={movie._id}
                   movie={movie} 
                   image={movie.image}
-                  nameRU = {movie.nameRU}
+                  nameEN = {movie.nameEN}
                   duration = {calcDuration(movie.duration)}
                   trailer = {movie.trailerLink}
                   savedMovies={savedMovies}

@@ -121,7 +121,7 @@ function App() {
         })
         .catch(() => {
           setIsLoading(false);
-          setLoginError('Неверные email или пароль');
+          setLoginError('Invalid email or password');
         })
     };
 
@@ -139,7 +139,7 @@ function App() {
       })
       .catch(() => {
         setIsLoading(false);
-        setRegistrationError('Что-то пошло не так...');
+        setRegistrationError('Something went wrong');
       })
   };
 
@@ -149,7 +149,7 @@ function App() {
       .editProfile(name, email)
       .then((res) => {
         setCurrentUser(res);
-        setProfileMessage('Профиль успешно обновлен!');
+        setProfileMessage('Profile has been updated');
         setIsSuccess(true);
         setTimeout(() => {
           setProfileMessage('');
@@ -158,7 +158,7 @@ function App() {
       .catch((err) => {
         console.log(err)
         setIsSuccess(false);
-        setProfileMessage('Что-то пошло не так...');
+        setProfileMessage('Something went wrong');
         setTimeout(() => {
           setProfileMessage('');
         }, 2000);
@@ -201,9 +201,9 @@ function App() {
       //if there is an error we clean localStorage and take movies from API
       } catch(err) {
         localStorage.removeItem('allMovies');
-        setIsLoadingError('Во время запроса произошла ошибка. '
-        + 'Возможно, проблема с соединением или сервер недоступен. '
-        + 'Подождите немного и попробуйте ещё раз');
+        setIsLoadingError('An error occured during the request. '
+        + 'Unable to connect to the server at the moment. '
+        + 'Wait a few moments and try again.');
         fetchMovies();
       }
     } else {
@@ -217,7 +217,7 @@ function App() {
       const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
         if (filterData.length === 0) {
           setIsNoResult(true);
-          setNoResultMessage('Ничего не найдено')
+          setNoResultMessage('No results found')
         } else {
           setIsNoResult(false);
           setNoResultMessage('')
@@ -261,20 +261,6 @@ function App() {
         })
         .catch(err => console.log(err))
   };  
-
-    // //delete saved movies
-    // const  handleSavedMovieDelete = (movie) => {
-    //   debugger
-    //   const movieId = savedMovies.find((item) => item.id === movie.id)._id;
-    //     mainApi
-    //       .deleteMovie(movieId)
-    //       .then(() => {
-    //         const updatedSavedMovies = savedMovies.filter(m => m._id !== movieId)
-    //         setSavedMovies(updatedSavedMovies);
-    //         localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
-    //       })
-    //       .catch(err => console.log(err))
-    // };
 
   const onFilterClick = (isOn) => {
     localStorage.setItem('filterIsOn', isOn);

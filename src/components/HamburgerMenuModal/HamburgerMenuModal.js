@@ -2,7 +2,7 @@ import React from "react";
 import './HamburgerMenuModal.css';
 import { Link } from "react-router-dom";
 
-function HamburgerMenuModal({onClick, isOpen, onClose, accauntEmail}) {
+function HamburgerMenuModal({onClick, isOpen, onClose}) {
 
   const burgerMenuButtonClassName = `hamburger__button ${isOpen ? 'hamburger__button_hidden' : 'hamburger__button'}`;
 
@@ -16,11 +16,11 @@ function HamburgerMenuModal({onClick, isOpen, onClose, accauntEmail}) {
         <div className={burgerMenuClassName}> 
         <button className="hamburger__close-button" onClick={onClose}/>
           <nav className="hamburger__nav">
-            <Link className="hamburger__link" to="/" onClick={onClose}>Главная</Link>
-            <Link className="hamburger__link hamburger__link_active" to="/movies" onClick={onClose}>Фильмы</Link>
-            <Link className="hamburger__link" to="/saved-movies" onClick={onClose}>Сохранённые фильмы</Link>
+            <Link className="hamburger__link" to="/" onClick={onClose}>Main</Link>
+            <Link className="hamburger__link hamburger__link_active" to="/movies" onClick={onClose}>Movies</Link>
+            <Link className="hamburger__link" to="/saved-movies" onClick={onClose}>Saved movies</Link>
           </nav>
-          <Link className="hamburger__login-button button" to="/profile" onClick={onClose}>Аккаунт</Link>
+          <Link className="hamburger__login-button button" to="/profile" onClick={onClose}>Profile</Link>
         </div>
     </>
   );

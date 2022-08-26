@@ -11,7 +11,7 @@ function FilterCheckbox({onFilterClick, filterIsOn}) {
           onChange = {(e) => onFilterClick(e.target.checked)} />
         <span className="filterCheckbox__switch"></span>
       </label>
-      <p className="filterCheckbox__caption">Короткометражки</p>
+      <p className="filterCheckbox__caption">Short movies</p>
     </div>
   );
 }

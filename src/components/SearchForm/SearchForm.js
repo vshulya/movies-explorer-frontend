@@ -18,7 +18,7 @@ function SearchForm({onFilterClick, onSearch, query, setQuery, filterIsOn}) {
   const handleSubmit = (e) => {
     e.preventDefault();
       if (!query) {
-        setError('Нужно ввести ключевое слово');
+        setError('Type something in');
         setTimeout(() => {
         setError('');
       }, 3000);
@@ -33,7 +33,7 @@ function SearchForm({onFilterClick, onSearch, query, setQuery, filterIsOn}) {
       <form className="searchForm__form" onSubmit={handleSubmit} noValidate>
         <input className="searchForm__input"
           name="search-form"
-          placeholder="Фильм" 
+          placeholder="Movie" 
           value={query || ''}
           type="search"
           onChange={(e) => setQuery(e.target.value)}
@@ -42,7 +42,7 @@ function SearchForm({onFilterClick, onSearch, query, setQuery, filterIsOn}) {
         <button className="searchForm__button button" 
           type="submit"
           onSubmit={handleSubmit}>
-            <img src={search_icon} alt="значок поиска" className="searchForm__search"/>
+            <img src={search_icon} alt="search" className="searchForm__search"/>
         </button>
       </form> 
       {error && <span className="searchForm__error">{error}</span>}   

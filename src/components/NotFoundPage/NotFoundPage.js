@@ -13,9 +13,9 @@ export function NotFoundPage(){
       <div className="notFound__container">
         <div className="notFound__wrapper">
           <h2 className="notFound__title">404</h2>
-          <p className="notFound__subtitle">Страница не найдена</p>
+          <p className="notFound__subtitle">Page not found</p>
         </div>
-        <Link className="notFound__link link" to="" onClick={handleBack}>Назад</Link>
+        <Link className="notFound__link link" to="" onClick={handleBack}>Go back</Link>
       </div>
     </section>
   )

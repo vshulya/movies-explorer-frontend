@@ -48,7 +48,7 @@ const Register = ({handleRegister, isLoading, registrationError}) => {
             <span className='auth__validation-error'>{errors.email}</span>
         </label>
         <label className="auth__field">
-          <p className='auth__input-name'>Пароль</p>
+          <p className='auth__input-name'>Password</p>
           <input
             type="password"
             onChange={handleChange}
@@ -67,9 +67,9 @@ const Register = ({handleRegister, isLoading, registrationError}) => {
         className={`auth__button button 
         ${isValid ? '': 'auth__button_disabled'}`} 
         disabled={!isValid} >
-        Зарегистрироваться</button>
-        <p className="auth__hint">Уже зарегистрированы?{" "}
-        <Link className="auth__link link" to="/signin">Войти</Link>
+        Sign up</button>
+        <p className="auth__hint">Have an account?{" "}
+        <Link className="auth__link link" to="/signin">Sign in</Link>
         </p>
       </div>
     </AuthForm>

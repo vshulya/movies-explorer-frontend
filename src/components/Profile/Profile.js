@@ -50,12 +50,12 @@ function Profile({onUpdateUser, onLogOut, isLoading, isSuccess, profileMessage})
   return (
     <section className="profile">
       <div className="profile__container">
-        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+        <h2 className="profile__title">Hey, {currentUser.name}!</h2>
         <form className="profile__form"
         onSubmit={handleSubmit}
         noValidate>
           <fieldset className='profile__fieldset'>
-            <label className="profile__field">Имя
+            <label className="profile__field">Name
               <input
                 disabled={isFormDisabled}
                 type="text"
@@ -92,8 +92,8 @@ function Profile({onUpdateUser, onLogOut, isLoading, isSuccess, profileMessage})
           {isFormDisabled ?
             <button className="profile__edit-button button" onClick={disabledButton}>Редактировать</button> :
             <button type="submit" disabled={!isValid} className={`profile__edit-button button
-            ${isValid ? '': 'profile__edit-button_disabled'}`}>Сохранить</button>}
-            <Link className="profile__logout-link link" onClick={onLogOut} to="/signin">Выйти из аккаунта</Link>
+            ${isValid ? '': 'profile__edit-button_disabled'}`}>Save</button>}
+            <Link className="profile__logout-link link" onClick={onLogOut} to="/signin">Log out</Link>
           </div>
         </form>
       </div>

@@ -8,15 +8,15 @@ function Promo(props) {
   return (
     <section className="promo">
           <div className="promo__wrapper">
-            <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
-            <p className="promo__subtitle">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
+            <h1 className="promo__title">Student project for the web development faculty.</h1>
+            <p className="promo__subtitle">Below you can find more information about the project and me.</p>
             <Link className="promo__button button" 
             to="aboutProject"
             smooth={true}
             duration={1000}>
-            Узнать больше</Link>
+            More</Link>
           </div>
-          <img src={globus} alt="глобус" className="promo__hero" />     
+          <img src={globus} alt="globus" className="promo__hero" />     
     </section>
   );
 }

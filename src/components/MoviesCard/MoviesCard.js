@@ -4,7 +4,7 @@ import MoviesCardButtonDelete from '../MoviesCardButtonDelete/MoviesCardButtonDe
 
 import './MoviesCard.css';
 
-function MoviesCard({movie, savedMovies, image, nameRU, trailer, duration, onMovieDelete, onMovieSave, isMovieSaved}) {
+function MoviesCard({movie, savedMovies, image, nameEN, trailer, duration, onMovieDelete, onMovieSave, isMovieSaved}) {
   
   
   const isSaved = isMovieSaved(movie);
@@ -25,14 +25,14 @@ function MoviesCard({movie, savedMovies, image, nameRU, trailer, duration, onMov
       href={trailer}
       target="_blank" rel="noreferrer">
         <img
-      alt={`Фотография к фильму ${nameRU}`} 
+      alt={`${nameEN}`} 
       src={image} 
       className="movie__image"/>
       </a>
       
       <div className="movie__description">
         <div className="movie__info">
-          <h2 className="movie__title">{nameRU}</h2>
+          <h2 className="movie__title">{nameEN}</h2>
           <p className="movie__duration">{duration}</p>
         </div>
         {savedMovies

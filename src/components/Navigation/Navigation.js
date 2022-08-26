@@ -53,11 +53,11 @@ function Navigation({accauntEmail}) {
                 />
             </div>
             <nav className="nav__menu"> 
-              <Link className="nav__link link" to="/movies" >Фильмы</Link>
-              <Link className="nav__link link" to="/saved-movies">Сохранённые фильмы</Link>
+              <Link className="nav__link link" to="/movies" >Movies</Link>
+              <Link className="nav__link link" to="/saved-movies">Saved movies</Link>
             </nav>
             </div>
-            <Link  className="nav__profile-link link" to="/profile">Аккаунт</Link>
+            <Link  className="nav__profile-link link" to="/profile">Profile</Link>
       </div>
     </>
   );
