@@ -1,32 +1,24 @@
 # Frontend Movies-Explorer
 
-Фронтенд часть дипломного проекта в Яндекс-Практикум
+A web application for searching and saving movie trailers with user registration and authentication. Deployed to a VPS. Stack used: Backend in Ubuntu/Nginx/Node.js/Express/MongoDB with a React.js frontend. 
 
-Проект Movies-explorer с системами авторизации и регистрации пользователя. \
+Backend: https://github.com/vshulya/movies-explorer-api/ 
 
-Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете. \
-Ссылка на проект https://moviesexplorer.nomoredomains.sbs/ \
-Ссылка на пуллреквест https://github.com/vshulya/movies-explorer-frontend/pull/2
-
-Backend: [Express JS](https://github.com/vshulya/movies-explorer-api/) \
-
-## Домены для проекта
+## Domaines
+Backend: https://api.my-movies-explorer.nomoredomains.xyz \
 Frontend: https://moviesexplorer.nomoredomains.sbs/ \
-Backend: api.my-movies-explorer.nomoredomains.xyz \
-Публичный IP адрес: 51.250.94.105
+A public IP address: 51.250.94.105
 
-Вы можете залогинится или использовать для входа:\
-логин: test@test.com\
-пароль: testtest
+## Functionality
+Full user profiles with profile pictures \
+Seaching movie trailers \
+Saving and deleting movie trailers 
 
-[Ссылка на макет в Figma](https://www.figma.com/file/nkFZmsACLKTKKv7KHuPHbM/Diploma-(Copy)?node-id=891%3A3857)
+## Stack
+Ubuntu | Nginx | Node.js | Express | MongoDB
 
-## Функциональность 
-Авторизация и регистрация пользователей\
-Редактирование профиля\
-Добавление и удаление фильмов
 
-## Использованные технологии
-Express JS | Node.js | MongoDB 
+
+
 
 
