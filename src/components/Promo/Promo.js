@@ -8,7 +8,7 @@ function Promo(props) {
   return (
     <section className="promo">
           <div className="promo__wrapper">
-            <h1 className="promo__title">Student project for the web development faculty.</h1>
+            <h1 className="promo__title">Student web development project</h1>
             <p className="promo__subtitle">Below you can find more information about the project and me.</p>
             <Link className="promo__button button" 
             to="aboutProject"

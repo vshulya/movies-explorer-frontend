@@ -11,11 +11,9 @@ function AboutMe(props) {
         <div className="aboutMe__info">
           <h3 className="aboutMe__subtitle">Hey there, I'm Valya.</h3>
           <p className="aboutMe__caption">I'm a frontend web developer</p>
-          <p className="aboutMe__text">I worked as an account-manager in a midel-sized tech company. In 2019 I moved to the United States. I had to leave my office job but I defenetly wanted to continue to work with tech industry.<br></br>
-          With my partner and a small team we were developing an Unreal-based survival game. I used programmatic blueprints to create procedural animations and landscapes and decided to explore the world of web development. 
-          I graduated Yandex.Practicum bootcamp.<br></br>
-          These days I live in Portugal and my time is spent building and deploying React apps. 
-          When I'm not coding, you can find me surfing, out hiking or playing video games.
+          <p className="aboutMe__text">I worked as an account manager in a medium-sized tech company. In 2019 I moved to the United States. I had to leave my office job, but I wanted to continue to work in the tech industry.
+With my partner and a small team, we were developing an Unreal-based survival game. I used programmatic blueprints to create procedural animations and landscapes and decided to explore the world of web development. I graduated from Yandex.Practicum bootcamp.
+Now I live in Portugal. I'm building and deploying React apps. When I'm not coding, you can find me surfing, hiking, or playing video games.
           </p>
           <ul className="aboutMe__links">
             <li><a className="aboutMe__link link" href="https://www.facebook.com/valentina.shulagina" target="_blanck" rel="noreferrer">Facebook</a></li>
