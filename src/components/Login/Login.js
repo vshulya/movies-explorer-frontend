@@ -15,7 +15,7 @@ const Login = ({handleLogin, loginError}) => {
 
   return (
     <AuthForm
-      title="Рады видеть!"
+      title="Welcome back!"
       onSubmit={handleSubmit}>
       <fieldset className='auth__fieldset'>
         <label className="auth__field">

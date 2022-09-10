@@ -15,7 +15,7 @@ const Register = ({handleRegister, isLoading, registrationError}) => {
 
   return (
     <AuthForm
-      title="Добро пожаловать!"
+      title="Welcome!"
       formName='register'
       onSubmit={handleSubmit}
       isLoading={isLoading}
