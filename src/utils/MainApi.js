@@ -120,11 +120,11 @@ class MainApi {
 }
 
   const mainApi = new MainApi({
-    baseUrl: 'http://140.82.42.116',
+    baseUrl: 'http://140.82.42.116/api',
     // baseUrl: 'https://api.my-movies-explorer.nomoredomains.xyz',
     headers() { 
       return  {
-        "Access-Control-Allow-Origin": 'http://140.82.42.116',
+        'Access-Control-Allow-Origin': '*',
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }

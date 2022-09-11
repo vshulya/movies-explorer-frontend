@@ -62,7 +62,7 @@ function Profile({onUpdateUser, onLogOut, isLoading, isSuccess, profileMessage})
                 value={values.name || ''}
                 onChange={handleChange}
                 pattern="[а-яА-Яa-zA-ZёË\- ]{1,}"
-                placeholder="Имя"
+                placeholder="Name"
                 name="name"
                 className="profile__input"
                 minLength="2"
@@ -90,7 +90,7 @@ function Profile({onUpdateUser, onLogOut, isLoading, isSuccess, profileMessage})
           {profileMessage}</span>
           
           {isFormDisabled ?
-            <button className="profile__edit-button button" onClick={disabledButton}>Редактировать</button> :
+            <button className="profile__edit-button button" onClick={disabledButton}>Edit</button> :
             <button type="submit" disabled={!isValid} className={`profile__edit-button button
             ${isValid ? '': 'profile__edit-button_disabled'}`}>Save</button>}
             <Link className="profile__logout-link link" onClick={onLogOut} to="/signin">Log out</Link>
