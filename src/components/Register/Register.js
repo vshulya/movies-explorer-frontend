@@ -22,7 +22,7 @@ const Register = ({handleRegister, isLoading, registrationError}) => {
     >
       <fieldset className='auth__fieldset'>
         <label className="auth__field">
-          <p className='auth__input-name'>Имя</p>
+          <p className='auth__input-name'>Name</p>
           <input
             type="text"
             value={values.name || ''}
