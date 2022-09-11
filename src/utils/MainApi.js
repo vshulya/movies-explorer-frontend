@@ -124,7 +124,7 @@ class MainApi {
     // baseUrl: 'https://api.my-movies-explorer.nomoredomains.xyz',
     headers() { 
       return  {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": 'http://140.82.42.116',
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
