@@ -120,7 +120,7 @@ class MainApi {
 }
 
   const mainApi = new MainApi({
-    baseUrl: 'http://140.82.42.116/api',
+    baseUrl: 'http://140.82.42.116/moviesexplorer/api',
     // baseUrl: 'https://api.my-movies-explorer.nomoredomains.xyz',
     headers() { 
       return  {
