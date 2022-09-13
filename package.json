@@ -2,6 +2,8 @@
   "name": "movies-explorer",
   "version": "0.1.0",
   "private": true,
+
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -18,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* root@140.82.42.116:/movies-explorer-frontend"
+    "deploy": "npm run build && scp -r ./build/* root@140.82.42.116:/var/www/movies-explorer-frontend"
   },
   "eslintConfig": {
     "extends": [
